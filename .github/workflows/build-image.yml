@@ -5,9 +5,9 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: Install toolchain
-        run: >
-            sudo apt-get update;
-            sudo apt-get install build-essential crossbuild-essential-arm64 device-tree-compiler;
+        run: |
+            sudo apt-get update
+            sudo apt-get install build-essential crossbuild-essential-arm64 device-tree-compiler
       - name: Clone rkbin repository
         uses: actions/checkout@v3
         with:
@@ -20,10 +20,10 @@ jobs:
           ref: 'deploy'
           path: 'u-boot-quartz64'
       - name: Build u-boot
-        run: >
-          cd u-boot-quartz64;
-          make mrproper;
-          ./make.sh rk3566-quartz64;
+        run: |
+          cd u-boot-quartz64
+          make mrproper
+          ./make.sh rk3566-quartz64
       - name: Archive u-boot artifacts
         uses: actions/upload-artifact@v3
         with:
