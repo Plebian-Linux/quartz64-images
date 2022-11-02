@@ -1,0 +1,33 @@
+name: Build Quartz64 Images
+on: workflow_dispatch
+jobs:
+  build_uboot:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Install toolchain
+        run: >
+            sudo apt-get update;
+            sudo apt-get install build-essential crossbuild-essential-arm64 device-tree-compiler python2;
+      - name: Clone rkbin repository
+        uses: actions/checkout@v3
+        with:
+          repository: 'rockchip-linux/rkbin'
+          path: 'rkbin'
+      - name: Clone u-boot repository
+        uses: actions/checkout@v3
+        with:
+          repository: 'CounterPillow/u-boot-quartz64'
+          ref: 'deploy'
+          path: 'u-boot-quartz64'
+      - name: Build u-boot
+        run: >
+          cd u-boot-quartz64;
+          make mrproper;
+          ./make.sh rk3566-quartz64;
+      - name: Archive u-boot artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: u-boot
+          path: |
+            u-boot-quartz64/rk356x_spl_loader_*.bin
+            u-boot-quartz64/uboot.img
