@@ -31,3 +31,34 @@ jobs:
           path: |
             u-boot-quartz64/rk356x_spl_loader_*.bin
             u-boot-quartz64/uboot.img
+  build_kernel:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Clone workflow repository
+        uses: actions/checkout@v3
+      - name: Install toolchain
+        run: |
+            sudo apt-get update
+            sudo apt-get install build-essential crossbuild-essential-arm64 device-tree-compiler flex bison
+      - name: Clone kernel repository
+        uses: actions/checkout@v3
+        with:
+          repository: 'CounterPillow/linux'
+          ref: 'quartz64-deploy'
+          path: 'linux'
+      - name: Make config
+        run: |
+          cp config linux/.config
+          cd linux
+          make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- olddefconfig
+      - name: Build kernel
+        run: |
+          cd linux
+          make -j$(nproc) ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- deb-pkg
+      - name: Archive kernel artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: linux-kernel
+          path: |
+            linux-image-*.deb
+            linux-libc-dev*.deb
