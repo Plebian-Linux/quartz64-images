@@ -1,0 +1,92 @@
+{{- $board := or .board "tobereplaced" -}}
+{{- $suite := or .suite "bookworm" -}}
+{{- $mirror := or .mirror "https://deb.debian.org/debian" -}}
+{{- $hostname := or .hostname (printf "plebian-%s" $board) -}}
+{{- $image := or .image (printf "plebian-debian-%s-%s.img" $suite $board) -}}
+
+architecture: "arm64"
+
+actions:
+  - action: debootstrap
+    suite: {{ $suite }}
+    components:
+      - main
+      - contrib
+      - non-free
+    mirror: {{ $mirror }}
+    variant: minbase
+  - action: apt
+    description: Installing base packages
+    recommends: false
+    packages:
+      - sudo
+      - openssh-server
+      - vim
+      - u-boot-menu
+
+  # I wish I could use hostnamectl here, but it doesn't find it for some reason.
+  - action: run
+    description: Setting hostname
+    chroot: true
+    command: |
+      echo "{{ $hostname }}" >/etc/hostname
+      echo "127.0.0.1	localhost {{ $hostname }}" >/etc/hosts
+
+  - action: overlay
+    description: Copy kernel debs to /root
+    source: overlays/linux-kernel/
+    destination: /root/
+
+  - action: run
+    description: Install linux kernel packages
+    chroot: true
+    command: dpkg -i /root/*.deb
+
+  - action: run
+    description: Clean up debs in /root
+    chroot: true
+    command: rm /root/*.deb
+
+  - action: run
+    description: Setting up u-boot default file
+    chroot: true
+    script: scripts/set-u-boot-defaults.sh {{ $board }}
+
+  - action: run
+    description: Running u-boot-update
+    chroot: true
+    command: u-boot-update
+
+  - action: image-partition
+    description: Partitioning image
+    imagename: {{ $image }}
+    imagesize: 1GB
+    partitiontype: gpt
+    mountpoints:
+      - mountpoint: /
+        partition: root
+    partitions:
+      - name: root
+        fs: ext4
+        start: 32MB
+        end: 100%
+
+  - action: filesystem-deploy
+    description: Deploying filesystem image
+
+  - action: raw
+    description: Writing U-Boot SPL image
+    origin: recipe
+    source: '/u-boot/rk356x_spl_loader.bin'
+    offset: {{ sector 64 }}
+
+  - action: raw
+    description: Writing uboot.img
+    origin: recipe
+    source: '/u-boot/uboot.img'
+    offset: 8388608
+
+  - action: run
+    description: Packing result image
+    postprocess: true
+    command: xz -z -v -f -T 0 {{ $image }}
