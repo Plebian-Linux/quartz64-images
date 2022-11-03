@@ -31,6 +31,7 @@ jobs:
           path: |
             u-boot-quartz64/rk356x_spl_loader_*.bin
             u-boot-quartz64/uboot.img
+            u-boot-quartz64/idblock.bin
   build_kernel:
     runs-on: ubuntu-20.04
     steps:
