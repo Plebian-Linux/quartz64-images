@@ -77,7 +77,7 @@ actions:
   - action: raw
     description: Writing U-Boot SPL image
     origin: recipe
-    source: '/u-boot/rk356x_spl_loader.bin'
+    source: '/u-boot/idblock.bin'
     offset: {{ sector 64 }}
 
   - action: raw
