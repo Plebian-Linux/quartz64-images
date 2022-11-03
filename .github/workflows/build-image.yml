@@ -64,6 +64,25 @@ jobs:
             linux-image-*.deb
             linux-libc-dev*.deb
   build_image:
+    strategy:
+      matrix:
+        boards: [
+          {
+            name: "Quartz64 Model A",
+            debos-yaml: "debian-quartz64a.yaml",
+            uboot-name: "quartz64a"
+          },
+          {
+            name: "Quartz64 Model B",
+            debos-yaml: "debian-quartz64b.yaml",
+            uboot-name: "quartz64b"
+          },
+          {
+            name: "SOQuartz CM4 IO Board",
+            debos-yaml: "debian-soquartz-cm4.yaml",
+            uboot-name: "soquartz-cm4"
+          },
+        ]
     runs-on: ubuntu-22.04
     needs:
       - build_uboot
@@ -91,15 +110,11 @@ jobs:
                                systemd-container
       - name: Install debos
         run: go install -v github.com/go-debos/debos/cmd/debos@latest
-      - name: Build Quartz64 Model A Image
-        run: sudo /opt/src/gocode/bin/debos --disable-fakemachine debos-recipes/debian-quartz64a.yaml
-      - name: Build Quartz64 Model B Image
-        run: sudo /opt/src/gocode/bin/debos --disable-fakemachine debos-recipes/debian-quartz64b.yaml
-      - name: Build SOQuartz-CM4 Image
-        run: sudo /opt/src/gocode/bin/debos --disable-fakemachine debos-recipes/debian-soquartz-cm4.yaml
+      - name: Build ${{ matrix.boards.name }} Image
+        run: sudo /opt/src/gocode/bin/debos --disable-fakemachine debos-recipes/${{ matrix.boards.debos-yaml }}
       - name: Archive image artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: quartz64-images
+          name: ${{ matrix.boards.name }} Image
           path: |
             *.img.xz
