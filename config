@@ -1,4 +1,4 @@
-CONFIG_LOCALVERSION="pillowbian"
+CONFIG_LOCALVERSION="plebian"
 
 ##
 ## file: arch/Kconfig
