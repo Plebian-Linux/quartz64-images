@@ -32,7 +32,7 @@ jobs:
             u-boot-quartz64/rk356x_spl_loader_*.bin
             u-boot-quartz64/uboot.img
   build_kernel:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-20.04
     steps:
       - name: Clone workflow repository
         uses: actions/checkout@v3
