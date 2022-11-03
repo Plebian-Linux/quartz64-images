@@ -63,3 +63,43 @@ jobs:
           path: |
             linux-image-*.deb
             linux-libc-dev*.deb
+  build_image:
+    runs-on: ubuntu-22.04
+    needs:
+      - build_uboot
+      - build_kernel
+    env:
+      GOPATH: /opt/src/gocode
+    steps:
+      - name: Clone workflow repository
+        uses: actions/checkout@v3
+      - name: Download u-boot artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: u-boot
+          path: debos-recipes/u-boot/
+      - name: Download kernel artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: linux-kernel
+          path: debos-recipes/overlays/linux-kernel/
+      - name: Install debos dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install golang git libglib2.0-dev libostree-dev \
+                               qemu-system-x86 qemu-user-static debootstrap \
+                               systemd-container
+      - name: Install debos
+        run: go install -v github.com/go-debos/debos/cmd/debos@latest
+      - name: Build Quartz64 Model A Image
+        run: sudo /opt/src/gocode/bin/debos --disable-fakemachine debos-recipes/debian-quartz64a.yaml
+      - name: Build Quartz64 Model B Image
+        run: sudo /opt/src/gocode/bin/debos --disable-fakemachine debos-recipes/debian-quartz64b.yaml
+      - name: Build SOQuartz-CM4 Image
+        run: sudo /opt/src/gocode/bin/debos --disable-fakemachine debos-recipes/debian-soquartz-cm4.yaml
+      - name: Archive image artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: quartz64-images
+          path: |
+            *.img.xz

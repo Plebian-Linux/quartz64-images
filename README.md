@@ -21,7 +21,6 @@ that is being updated.
 ## TODO:
 
 * get u-boot working (duh)
-* integrate debos into the GitHub actions workflow
 * create a user other than root, add them to some groups, etc.
 * repository-ing the kernel packages
     * pushing the packages from the pipeline to a repository
