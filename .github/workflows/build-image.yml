@@ -2,36 +2,57 @@ name: Build Quartz64 Images
 on: workflow_dispatch
 jobs:
   build_uboot:
+    strategy:
+      matrix:
+        boards: [
+          {
+            name: "Quartz64 Model A",
+            uboot-config: "quartz64-a-rk3566_defconfig",
+            uboot-name: "quartz64a"
+          },
+          {
+            name: "EVB",
+            uboot-config: "evb-rk3568_defconfig",
+            uboot-name: "evb-rk3568"
+          },
+        ]
     runs-on: ubuntu-22.04
     steps:
       - name: Install toolchain
         run: |
             sudo apt-get update
             sudo apt-get install build-essential crossbuild-essential-arm64 device-tree-compiler
-      - name: Clone rkbin repository
-        uses: actions/checkout@v3
-        with:
-          repository: 'rockchip-linux/rkbin'
-          path: 'rkbin'
+      #- name: Clone rkbin repository
+      #  uses: actions/checkout@v3
+      #  with:
+      #    repository: 'rockchip-linux/rkbin'
+      #    path: 'rkbin'
       - name: Clone u-boot repository
         uses: actions/checkout@v3
         with:
           repository: 'CounterPillow/u-boot-quartz64'
           ref: 'deploy'
           path: 'u-boot-quartz64'
-      - name: Build u-boot
+      - name: Clean u-boot
         run: |
           cd u-boot-quartz64
           make mrproper
-          ./make.sh rk3566-quartz64
+      - name: Fetch old rkbins
+        run: |
+          wget -q https://github.com/JeffyCN/rockchip_mirrors/blob/6186debcac95553f6b311cee10669e12c9c9963d/bin/rk35/rk3568_bl31_v1.28.elf?raw=true -O u-boot-quartz64/bl31.elf
+          wget -q https://github.com/JeffyCN/rockchip_mirrors/blob/47404a141a1acb7555906b5e3b097b5f1045cc21/bin/rk35/rk3568_ddr_1560MHz_v1.11.bin?raw=true -O u-boot-quartz64/ram_init.bin
+      - name: Build u-boot
+        run: |
+          cd u-boot-quartz64
+          make ARCH=arm CROSS_COMPILE=aarch64-linux-gnu- ${{ matrix.boards.uboot-config }}
+          make ARCH=arm CROSS_COMPILE=aarch64-linux-gnu- -j$(nproc)
       - name: Archive u-boot artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: u-boot
+          name: u-boot-${{ matrix.boards.uboot-name }}
           path: |
-            u-boot-quartz64/rk356x_spl_loader_*.bin
-            u-boot-quartz64/uboot.img
-            u-boot-quartz64/idblock.bin
+            u-boot-quartz64/u-boot.itb
+            u-boot-quartz64/idbloader.img
   build_kernel:
     runs-on: ubuntu-20.04
     steps:
@@ -75,12 +96,12 @@ jobs:
           {
             name: "Quartz64 Model B",
             debos-yaml: "debian-quartz64b.yaml",
-            uboot-name: "quartz64b"
+            uboot-name: "evb-rk3568"
           },
           {
             name: "SOQuartz CM4 IO Board",
             debos-yaml: "debian-soquartz-cm4.yaml",
-            uboot-name: "soquartz-cm4"
+            uboot-name: "evb-rk3568"
           },
         ]
     runs-on: ubuntu-22.04
@@ -95,7 +116,7 @@ jobs:
       - name: Download u-boot artifacts
         uses: actions/download-artifact@v3
         with:
-          name: u-boot
+          name: u-boot-${{ matrix.boards.uboot-name}}
           path: debos-recipes/u-boot/
       - name: Download kernel artifacts
         uses: actions/download-artifact@v3
