@@ -18,15 +18,23 @@ that is being updated.
 * kernel: https://github.com/CounterPillow/linux/tree/quartz64-deploy
 
 
+## Current Features
+
+* Mainline based kernel - no shambling vendor BSP sources
+* Kernel that's actually packaged, and gets its own initramfs
+* root file system dynamically grown to full extent on first boot
+* User prompted for new password on first login
+
+
 ## TODO:
 
-* fix network interfaces
+* add network interfaces to systemd-networkd
+* regenerate openssh keys on first boot
 * repository-ing the kernel packages
     * pushing the packages from the pipeline to a repository
     * rebuilding the repository on incoming packages
     * versioning????
     * adding the repository to the images in apt sources
-    * u-boot-update post install
 * package the wireless firmware
 * generate ubuntu based images
 * add more SOQuartz baseboards as I (or someone else) mainlines device trees for
