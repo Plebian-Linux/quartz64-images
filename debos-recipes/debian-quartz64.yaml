@@ -23,6 +23,7 @@ actions:
       - openssh-server
       - vim
       - u-boot-menu
+      - initramfs-tools
 
   # I wish I could use hostnamectl here, but it doesn't find it for some reason.
   - action: run
@@ -46,6 +47,16 @@ actions:
     description: Clean up debs in /root
     chroot: true
     command: rm /root/*.deb
+
+  - action: overlay
+    description: Copy initramfs module list
+    source: overlays/initramfs-tools/
+    destination: /etc/initramfs-tools/
+
+  - action: run
+    description: Build initramfs
+    chroot: true
+    command: update-initramfs -u -k all
 
   - action: run
     description: Setting up u-boot default file
