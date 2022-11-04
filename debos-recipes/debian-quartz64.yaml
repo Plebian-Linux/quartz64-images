@@ -89,6 +89,11 @@ actions:
     chroot: true
     script: scripts/setup-user.sh {{ $username }} {{ $password }}
 
+  - action: run
+    description: tasksel standard
+    chroot: true
+    command: tasksel install standard
+
   - action: overlay
     description: Copy repart config
     source: overlays/repart.d/
