@@ -39,6 +39,16 @@ actions:
       - alsa-utils
       - dbus-broker
       - systemd-resolved
+      - systemd-timesyncd
+      - libpam-systemd
+      - locales
+      - manpages
+      - pciutils
+      - bzip2
+      - lsof
+      - traceroute
+      - libnss-systemd
+      - liblockfile-bin
 
   # Can't use hostnamectl here because systemd isn't pid 1 in this case
   # or some garbage
@@ -88,11 +98,6 @@ actions:
     description: Set up user
     chroot: true
     script: scripts/setup-user.sh {{ $username }} {{ $password }}
-
-  - action: run
-    description: tasksel standard
-    chroot: true
-    command: tasksel install standard
 
   - action: overlay
     description: Copy repart config
