@@ -20,13 +20,13 @@ that is being updated.
 
 ## TODO:
 
-* get u-boot working (duh)
 * create a user other than root, add them to some groups, etc.
 * repository-ing the kernel packages
     * pushing the packages from the pipeline to a repository
     * rebuilding the repository on incoming packages
     * versioning????
     * adding the repository to the images in apt sources
+    * u-boot-update post install
 * generate ubuntu based images
 * add more SOQuartz baseboards as I (or someone else) mainlines device trees for
   them.
