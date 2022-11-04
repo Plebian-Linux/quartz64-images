@@ -3,6 +3,8 @@
 {{- $mirror := or .mirror "https://deb.debian.org/debian" -}}
 {{- $hostname := or .hostname (printf "plebian-%s" $board) -}}
 {{- $image := or .image (printf "plebian-debian-%s-%s.img" $suite $board) -}}
+{{- $username := or .username "pleb" -}}
+{{- $password := or .password "pleb" -}}
 
 architecture: "arm64"
 
@@ -36,13 +38,14 @@ actions:
       - file
       - alsa-utils
 
-  # I wish I could use hostnamectl here, but it doesn't find it for some reason.
+  # Can't use hostnamectl here because systemd isn't pid 1 in this case
+  # or some garbage
   - action: run
-    description: Setting hostname
+    description: Set hostname
     chroot: true
     command: |
       echo "{{ $hostname }}" >/etc/hostname
-      echo "127.0.0.1	localhost {{ $hostname }}" >/etc/hosts
+      echo "127.0.0.1    localhost {{ $hostname }}" >/etc/hosts
 
   - action: overlay
     description: Copy kernel debs to /root
@@ -70,17 +73,27 @@ actions:
     command: update-initramfs -u -k all
 
   - action: run
-    description: Setting up u-boot default file
+    description: Set up u-boot default file
     chroot: true
     script: scripts/set-u-boot-defaults.sh {{ $board }}
 
   - action: run
-    description: Running u-boot-update
+    description: Run u-boot-update
     chroot: true
     command: u-boot-update
 
+  - action: run
+    description: Set up user
+    chroot: true
+    script: scripts/setup-user.sh {{ $username }} {{ $password }}
+
+  - action: run
+    description: Clean rootfs
+    chroot: true
+    script: scripts/rootfs-cleanup.sh
+
   - action: image-partition
-    description: Partitioning image
+    description: Partition image
     imagename: {{ $image }}
     imagesize: 1GB
     partitiontype: gpt
@@ -94,21 +107,21 @@ actions:
         end: 100%
 
   - action: filesystem-deploy
-    description: Deploying filesystem image
+    description: Deploy filesystem image
 
   - action: raw
-    description: Writing U-Boot SPL image
+    description: Write U-Boot SPL image
     origin: recipe
     source: '/u-boot/idbloader.img'
     offset: {{ sector 64 }}
 
   - action: raw
-    description: Writing uboot.img
+    description: Write u-boot.itb
     origin: recipe
     source: '/u-boot/u-boot.itb'
     offset: 8388608
 
   - action: run
-    description: Packing result image
+    description: Pack result image
     postprocess: true
     command: xz -z -v -f -T 0 {{ $image }}
