@@ -21,7 +21,6 @@ that is being updated.
 ## TODO:
 
 * fix network interfaces
-* expand root filesystem on first boot
 * repository-ing the kernel packages
     * pushing the packages from the pipeline to a repository
     * rebuilding the repository on incoming packages
