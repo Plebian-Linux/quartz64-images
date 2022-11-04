@@ -17,7 +17,7 @@ actions:
       - non-free
     mirror: {{ $mirror }}
   - action: apt
-    description: Installing base packages
+    description: Install base packages
     recommends: false
     packages:
       - sudo
@@ -37,6 +37,8 @@ actions:
       - wget
       - file
       - alsa-utils
+      - dbus-broker
+      - systemd-resolved
 
   # Can't use hostnamectl here because systemd isn't pid 1 in this case
   # or some garbage
