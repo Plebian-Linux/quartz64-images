@@ -1,6 +1,7 @@
 dwmmc_rockchip
 rockchipdrm
-sdhci-dwcmshc
-phy-rockchip-emmc
-phy-rockchip-inno-hdmi
-phy-rockchip-naneng-combphy
+dw_hdmi
+dw_mipi_dsi
+analogix_dp
+sdhci_dwcmshc
+phy_rockchip_naneng_combphy
