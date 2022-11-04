@@ -14,7 +14,6 @@ actions:
       - contrib
       - non-free
     mirror: {{ $mirror }}
-    variant: minbase
   - action: apt
     description: Installing base packages
     recommends: false
@@ -24,6 +23,18 @@ actions:
       - vim
       - u-boot-menu
       - initramfs-tools
+      - ca-certificates
+      - man-db
+      - console-setup
+      - console-data
+      - parted
+      - bash-completion
+      - xz-utils
+      - zstd
+      - ssh
+      - wget
+      - file
+      - alsa-utils
 
   # I wish I could use hostnamectl here, but it doesn't find it for some reason.
   - action: run
