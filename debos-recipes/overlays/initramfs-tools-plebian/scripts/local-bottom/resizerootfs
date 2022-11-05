@@ -45,11 +45,19 @@ wait_for_udev 5
 
 # Now resize the filesystem
 partprobe $rootdev
+
 wait_for_udev 5
+
 resize2fs $rootpart
 
+wait_for_udev 5
+
+# HACK HACK HACK: Somehow I don't get the FSTYPE passed, and this cost hours
+# of my life to figure out. No, "auto" doesn't work here.
+FSTYPE=${FSTYPE:-"ext4"}
+
 # Remount root
-if ! mount -r ${FSTYPE:+-t "${FSTYPE}"} ${ROOTFLAGS} "${ROOT}" "${rootmnt?}"; then
+if ! mount -r -t "${FSTYPE}" ${ROOTFLAGS} "${ROOT}" "${rootmnt?}"; then
     panic "Failed to mount ${ROOT} as root file system."
 fi
 

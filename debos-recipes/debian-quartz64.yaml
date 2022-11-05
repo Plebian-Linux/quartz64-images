@@ -115,8 +115,6 @@ actions:
     mountpoints:
       - mountpoint: /
         partition: root
-        options:
-          - 'x-systemd.growfs'
     partitions:
       - name: idbloader
         fs: none
