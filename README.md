@@ -28,7 +28,6 @@ that is being updated.
 
 ## TODO:
 
-* add network interfaces to systemd-networkd
 * regenerate openssh keys on first boot
 * repository-ing the kernel packages
     * pushing the packages from the pipeline to a repository

@@ -60,6 +60,11 @@ actions:
       echo "127.0.0.1    localhost {{ $hostname }}" >/etc/hosts
 
   - action: overlay
+    description: Copy systemd-networkd config
+    source: overlays/systemd-networkd/
+    destination: /etc/systemd/network/
+
+  - action: overlay
     description: Copy kernel debs to /root
     source: overlays/linux-kernel/
     destination: /root/
