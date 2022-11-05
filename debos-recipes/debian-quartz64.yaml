@@ -139,6 +139,7 @@ actions:
         start: 65536s
         end: 100%
         parttype: b921b045-1df0-41c3-af44-4c6f280d3fae  # ARM 64 root type
+        flags: [ legacy_boot ]
 
   - action: filesystem-deploy
     description: Deploy filesystem image
