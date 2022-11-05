@@ -49,6 +49,7 @@ actions:
       - traceroute
       - libnss-systemd
       - liblockfile-bin
+      - e2fsprogs
 
   # Can't use hostnamectl here because systemd isn't pid 1 in this case
   # or some garbage
