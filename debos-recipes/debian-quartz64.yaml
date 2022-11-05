@@ -68,6 +68,11 @@ actions:
     destination: /etc/systemd/network/
 
   - action: overlay
+    description: Copy initramfs from Plebian
+    source: overlays/initramfs-tools-plebian/
+    destination: /etc/initramfs-tools/
+
+  - action: overlay
     description: Copy kernel debs to /root
     source: overlays/linux-kernel/
     destination: /root/
@@ -81,16 +86,6 @@ actions:
     description: Clean up debs in /root
     chroot: true
     command: rm /root/*.deb
-
-  - action: overlay
-    description: Copy initramfs module list
-    source: overlays/initramfs-tools/
-    destination: /etc/initramfs-tools/
-
-  - action: run
-    description: Build initramfs
-    chroot: true
-    command: update-initramfs -u -k all
 
   - action: run
     description: Set up u-boot default file

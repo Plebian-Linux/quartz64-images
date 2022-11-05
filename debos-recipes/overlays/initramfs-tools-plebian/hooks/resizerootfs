@@ -1,0 +1,25 @@
+#!/bin/sh
+set -e
+
+# shamelessly stolen (and modified) from https://salsa.debian.org/raspi-team/image-specs/-/tree/master/rootfs/etc/initramfs-tools
+
+#
+# List the soft prerequisites here.  This is a space separated list of
+# names, of scripts that are in the same directory as this one, that
+# must be run before this one can be.
+#
+PREREQS=""
+case $1 in
+    prereqs) echo "$PREREQS"; exit 0;;
+esac
+
+. /usr/share/initramfs-tools/hook-functions
+
+copy_exec /usr/bin/grep
+copy_exec /usr/bin/realpath
+copy_exec /usr/bin/tail
+copy_exec /sbin/blkid
+copy_exec /bin/lsblk
+copy_exec /sbin/parted
+copy_exec /sbin/partprobe
+copy_exec /sbin/resize2fs
