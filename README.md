@@ -23,11 +23,11 @@ that is being updated.
 * Mainline based kernel - no shambling vendor BSP sources
 * Kernel that's actually packaged, and gets its own initramfs
 * User prompted for new password on first login
+* Growing of the root filesystem on first boot
 
 
 ## TODO:
 
-* figure out repart weirdness
 * regenerate openssh keys on first boot
 * repository-ing the kernel packages
     * pushing the packages from the pipeline to a repository
