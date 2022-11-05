@@ -125,9 +125,17 @@ actions:
         options:
           - 'x-systemd.growfs'
     partitions:
+      - name: idbloader
+        fs: none
+        start: 64s
+        end: 16383s
+      - name: uboot
+        fs: none
+        start: 16384s
+        end: 65535s
       - name: root
         fs: ext4
-        start: 32MB
+        start: 65536s
         end: 100%
         parttype: b921b045-1df0-41c3-af44-4c6f280d3fae  # ARM 64 root type
 
@@ -138,13 +146,13 @@ actions:
     description: Write U-Boot SPL image
     origin: recipe
     source: '/u-boot/idbloader.img'
-    offset: {{ sector 64 }}
+    partition: idbloader
 
   - action: raw
     description: Write u-boot.itb
     origin: recipe
     source: '/u-boot/u-boot.itb'
-    offset: 8388608
+    partition: uboot
 
   - action: run
     description: Pack result image
