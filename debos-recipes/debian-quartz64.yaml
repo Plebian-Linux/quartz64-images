@@ -105,11 +105,6 @@ actions:
     chroot: true
     script: scripts/setup-user.sh {{ $username }} {{ $password }}
 
-  - action: overlay
-    description: Copy repart config
-    source: overlays/repart.d/
-    destination: /usr/lib/repart.d/
-
   - action: run
     description: Clean rootfs
     chroot: true
