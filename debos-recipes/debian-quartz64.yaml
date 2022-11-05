@@ -110,7 +110,7 @@ actions:
   - action: image-partition
     description: Partition image
     imagename: {{ $image }}
-    imagesize: 2GB
+    imagesize: 1GB
     partitiontype: gpt
     mountpoints:
       - mountpoint: /
