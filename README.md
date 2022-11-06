@@ -26,6 +26,13 @@ that is being updated.
 * Growing of the root filesystem on first boot
 
 
+## User Documentation
+
+Please see [RUNNING.md](RUNNING.md) for various collected notes regarding how
+to use this image to its fullest potential, so you don't make yourself look
+like an idiot on YouTube as you "explain computers".
+
+
 ## TODO:
 
 * regenerate openssh keys on first boot
