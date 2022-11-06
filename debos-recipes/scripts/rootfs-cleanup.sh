@@ -14,6 +14,8 @@ rm -f /etc/ssh/ssh_host_* \
       /var/lib/dbus/machine-id \
       /var/lib/systemd/random-seed \
       /var/lib/systemd/credential.secret
-# make /etc/machine-id an empty file so systemd can bind-mount over it
-# fixes systemd-broker breakage
+# make /etc/machine-id a file with "uninitialized" in it so systemd can
+# bind-mount over it, fixes systemd-broker breakage
+# empty file is not the way to go, causes firstboot condition to break
 touch /etc/machine-id
+echo "uninitialized" > /etc/machine-id
