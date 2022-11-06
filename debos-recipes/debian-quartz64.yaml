@@ -70,9 +70,9 @@ actions:
       echo "127.0.0.1    localhost {{ $hostname }}" >/etc/hosts
 
   - action: overlay
-    description: Copy systemd-networkd config
-    source: overlays/systemd-networkd/
-    destination: /etc/systemd/network/
+    description: Copy interfaces.d config
+    source: overlays/interfaces.d/
+    destination: /etc/network/interfaces.d/
 
   - action: overlay
     description: Copy initramfs from Plebian
