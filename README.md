@@ -24,6 +24,7 @@ that is being updated.
 * Kernel that's actually packaged, and gets its own initramfs
 * User prompted for new password on first login
 * Growing of the root filesystem on first boot
+* Regenerating OpenSSH host keys on first boot
 
 
 ## User Documentation
@@ -35,7 +36,6 @@ like an idiot on YouTube as you "explain computers".
 
 ## TODO:
 
-* regenerate openssh keys on first boot
 * repository-ing the kernel packages
     * pushing the packages from the pipeline to a repository
     * rebuilding the repository on incoming packages

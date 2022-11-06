@@ -75,6 +75,18 @@ actions:
     destination: /etc/network/interfaces.d/
 
   - action: overlay
+    description: Copy custom systemd units
+    source: overlays/systemd-units/
+    destination: /usr/lib/systemd/system/
+
+  - action: run
+    description: Enable custom systemd units
+    chroot: True
+    command: |
+      mkdir -p /etc/systemd/system/multi-user.target.wants
+      ln -s /usr/lib/systemd/system/regen-openssh-keys.service /etc/systemd/system/multi-user.target.wants/regen-openssh-keys.service
+
+  - action: overlay
     description: Copy initramfs from Plebian
     source: overlays/initramfs-tools-plebian/
     destination: /etc/initramfs-tools/

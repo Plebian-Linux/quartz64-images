@@ -1,0 +1,12 @@
+[Unit]
+Description=Regenerate OpenSSH Host Keys
+ConditionPathExistsGlob=!/etc/ssh/ssh_host_*_key
+ConditionFileIsExecutable=/usr/bin/ssh-keygen
+Before=sshd.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/ssh-keygen -A -v
+
+[Install]
+WantedBy=multi-user.target
