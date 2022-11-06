@@ -53,6 +53,12 @@ actions:
       - parted
       - ncurses-term
       - bluetooth
+      - gawk
+
+  - action: run
+    description: Install standard packages
+    chroot: true
+    script: scripts/install-standard.sh
 
   # Can't use hostnamectl here because systemd isn't pid 1 in this case
   # or some garbage
