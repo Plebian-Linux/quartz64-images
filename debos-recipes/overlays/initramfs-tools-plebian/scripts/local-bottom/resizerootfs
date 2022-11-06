@@ -36,7 +36,7 @@ fi
 log_begin_msg "$0 resizing $ROOT"
 
 # Unmount for safety
-umount "${rootmnt}"
+# umount "${rootmnt}"
 
 # Expand the partition size to fill the entire device
 parted -s $rootdev resizepart $rootpart_nr 100%
@@ -50,15 +50,15 @@ wait_for_udev 5
 
 resize2fs $rootpart
 
-wait_for_udev 5
+#wait_for_udev 5
 
 # HACK HACK HACK: Somehow I don't get the FSTYPE passed, and this cost hours
 # of my life to figure out. No, "auto" doesn't work here.
-FSTYPE=${FSTYPE:-"ext4"}
+#FSTYPE=${FSTYPE:-"ext4"}
 
 # Remount root
-if ! mount -r -t "${FSTYPE}" ${ROOTFLAGS} "${ROOT}" "${rootmnt?}"; then
-    panic "Failed to mount ${ROOT} as root file system."
-fi
+#if ! mount -r -t "${FSTYPE}" ${ROOTFLAGS} "${ROOT}" "${rootmnt?}"; then
+#    panic "Failed to mount ${ROOT} as root file system."
+#fi
 
 log_end_msg
