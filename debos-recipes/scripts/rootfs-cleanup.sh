@@ -14,3 +14,6 @@ rm -f /etc/ssh/ssh_host_* \
       /var/lib/dbus/machine-id \
       /var/lib/systemd/random-seed \
       /var/lib/systemd/credential.secret
+# make /etc/machine-id an empty file so systemd can bind-mount over it
+# fixes systemd-broker breakage
+touch /etc/machine-id

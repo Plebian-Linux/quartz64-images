@@ -15,7 +15,7 @@ cat <<EOF >> /etc/default/u-boot
 #U_BOOT_DEFAULT="l0"
 #U_BOOT_ENTRIES="all"
 #U_BOOT_MENU_LABEL="Debian GNU/Linux"
-U_BOOT_PARAMETERS="ignore_loglevel rw rootwait earlycon console=tty0 console=ttyS2,1500000n8 fw_devlink=off"
+U_BOOT_PARAMETERS="ignore_loglevel ro rootwait earlycon console=tty0 console=ttyS2,1500000n8 fw_devlink=off"
 U_BOOT_ROOT="root=LABEL=root"
 U_BOOT_TIMEOUT="30"
 U_BOOT_FDT="rockchip/$FDT_NAME"
