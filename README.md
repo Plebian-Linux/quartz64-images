@@ -36,12 +36,27 @@ like an idiot on YouTube as you "explain computers".
 
 ## TODO:
 
-* repository-ing the kernel packages
+* make a device tree package instead of a kernel package, ship 6.1 experimental
+  Debian kernel package instead
+    * write packaging scripts to `make dtbs` and install only the required dtbs
+      into a plebian subdirectory of the normal device tree blob dir
+    * have a post install script in the package that finds-and-replaces the
+      vanilla FDT path with the plebian one, and runs u-boot-update
+    * have a post (or pre?) remove script in the package that finds-and-replaces
+      the plebian FDT path with the vanilla one, and runs u-boot-update
+* repository-ing the devicetree package
     * pushing the packages from the pipeline to a repository
     * rebuilding the repository on incoming packages
-    * versioning????
+    * versioning???? (probably git describe on the kernel source tree)
     * adding the repository to the images in apt sources
+* ***First Public "Beta" Release Here***
+    * forum post
+    * wiki listing
+    * tweet?
 * package the wireless firmware
+* get a newer rkbin working with u-boot
+* base pg's stuff on a newer version of u-boot
+* get FDT overlays working in u-boot
 * generate ubuntu based images
 * add more SOQuartz baseboards as I (or someone else) mainlines device trees for
   them.
