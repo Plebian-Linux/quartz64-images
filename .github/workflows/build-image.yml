@@ -11,6 +11,11 @@ jobs:
             uboot-name: "quartz64a"
           },
           {
+            name: "Quartz64 Model B",
+            uboot-config: "quartz64-b-rk3566_defconfig",
+            uboot-name: "quartz64b"
+          },
+          {
             name: "EVB",
             uboot-config: "evb-rk3568_defconfig",
             uboot-name: "evb-rk3568"
@@ -96,7 +101,7 @@ jobs:
           {
             name: "Quartz64 Model B",
             debos-yaml: "debian-quartz64b.yaml",
-            uboot-name: "evb-rk3568"
+            uboot-name: "quartz64b"
           },
           {
             name: "SOQuartz CM4 IO Board",
