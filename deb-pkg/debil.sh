@@ -16,6 +16,7 @@ if [ -z "$3" ]; then
     exit 1
 fi
 
+mkdir -p control
 cat <<EOF > control/control
 Package: devicetrees-plebian-quartz64-$2
 Source: linux-upstream
@@ -32,7 +33,6 @@ Description: Plebian specific device trees for Quartz64
 EOF
 
 mkdir -p data
-mkdir -p control
 rm -f control/md5sums
 rm -f "$1"
 
