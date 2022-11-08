@@ -36,15 +36,18 @@ like an idiot on YouTube as you "explain computers".
 
 ## TODO:
 
-* make a device tree package instead of a kernel package, ship 6.1 experimental
-  Debian kernel package instead
-    * write packaging scripts to `make dtbs` and install only the required dtbs
-      into a plebian subdirectory of the normal device tree blob dir
+* replace resize2fs in initramfs with growfs mount option
+    * resize2fs doesn't seem to like read-only mounted filesystems during
+      online resizes
+* ship 6.1 experimental Debian kernel package instead
+* device tree package
+    * fork u-boot-menu to allow version independent path for FDTs
+    * add said u-boot-menu fork to the workflow, install it onto the image
     * have a post install script in the package that finds-and-replaces the
       vanilla FDT path with the plebian one, and runs u-boot-update
     * have a post (or pre?) remove script in the package that finds-and-replaces
       the plebian FDT path with the vanilla one, and runs u-boot-update
-* repository-ing the devicetree package
+* repository-ing the devicetree and u-boot-menu package
     * pushing the packages from the pipeline to a repository
     * rebuilding the repository on incoming packages
     * versioning???? (probably git describe on the kernel source tree)
