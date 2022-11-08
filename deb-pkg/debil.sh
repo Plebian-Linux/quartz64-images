@@ -11,10 +11,15 @@ if [ -z "$2" ]; then
     exit 1
 fi
 
+if [ -z "$3" ]; then
+    echo "Gimme a revision"
+    exit 1
+fi
+
 cat <<EOF > control/control
 Package: devicetrees-plebian-quartz64-$2
 Source: linux-upstream
-Version: $2
+Version: $2-$3
 Architecture: arm64
 Maintainer: Nicolas Frattaroli <frattaroli.nicolas@gmail.com>
 Installed-Size: $(du -sb data/ | cut -f1)
