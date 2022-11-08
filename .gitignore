@@ -1,0 +1,3 @@
+deb-pkg/data/*
+deb-pkg/control/control
+deb-pkg/control/md5sums
