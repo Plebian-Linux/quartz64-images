@@ -89,6 +89,25 @@ jobs:
           path: |
             linux-image-*.deb
             linux-libc-dev*.deb
+  build_dt_debs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone workflow repository
+        uses: actions/checkout@v3
+      - name: Install toolchain
+        run: |
+            sudo apt-get update
+            sudo apt-get install -yq build-essential crossbuild-essential-arm64 device-tree-compiler flex bison bc kmod cpio libssl-dev
+      - name: Build Device Tree Deb Package
+        run: |
+          cd deb-pkg
+          ./build-devicetree-deb.sh
+      - name: Archive Device Tree Debs
+        uses: actions/upload-artifact@v3
+        with:
+          name: devicetrees-plebian-quartz64
+          path: |
+            deb-pkg/*.deb
   build_image:
     strategy:
       matrix:
