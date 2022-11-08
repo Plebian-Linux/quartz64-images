@@ -23,7 +23,7 @@ Source: linux-upstream
 Version: $2-$3
 Architecture: arm64
 Maintainer: Nicolas Frattaroli <frattaroli.nicolas@gmail.com>
-Installed-Size: $(du -sb data/ | cut -f1)
+Installed-Size: $(du -s data/ | cut -f1)
 Section: kernel
 Priority: optional
 Homepage: https://github.com/Plebian-Linux/quartz64-images
