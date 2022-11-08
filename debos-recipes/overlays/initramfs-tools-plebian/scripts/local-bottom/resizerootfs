@@ -39,7 +39,7 @@ log_begin_msg "$0 resizing $ROOT"
 # umount "${rootmnt}"
 
 # Expand the partition size to fill the entire device
-echo "Yes" | parted -s $rootdev resizepart $rootpart_nr 100%
+echo "Yes" | parted ---pretend-input-tty $rootdev resizepart $rootpart_nr 100%
 
 wait_for_udev 5
 
