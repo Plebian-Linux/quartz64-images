@@ -59,14 +59,14 @@ jobs:
             u-boot-quartz64/u-boot.itb
             u-boot-quartz64/idbloader.img
   build_kernel:
-    runs-on: ubuntu-20.04
+    runs-on: self-hosted
     steps:
       - name: Clone workflow repository
         uses: actions/checkout@v3
       - name: Install toolchain
         run: |
             sudo apt-get update
-            sudo apt-get install build-essential crossbuild-essential-arm64 device-tree-compiler flex bison
+            sudo apt-get install -yq build-essential crossbuild-essential-arm64 device-tree-compiler flex bison bc kmod cpio libssl-dev
       - name: Clone kernel repository
         uses: actions/checkout@v3
         with:
