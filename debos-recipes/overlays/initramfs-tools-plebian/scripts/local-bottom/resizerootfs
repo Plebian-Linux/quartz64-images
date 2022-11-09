@@ -48,7 +48,8 @@ partprobe $rootdev
 
 wait_for_udev 5
 
-resize2fs $rootpart
+# We're gonna use systemd-growfs for this now
+#resize2fs $rootpart
 
 #wait_for_udev 5
 
