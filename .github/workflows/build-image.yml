@@ -91,6 +91,7 @@ jobs:
           path: |
             linux-image-*.deb
             linux-libc-dev*.deb
+            !linux-image-*dbg*.deb
   build_dt_debs:
     runs-on: ubuntu-latest
     steps:
