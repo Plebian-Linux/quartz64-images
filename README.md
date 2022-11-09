@@ -36,9 +36,6 @@ like an idiot on YouTube as you "explain computers".
 
 ## TODO:
 
-* replace resize2fs in initramfs with growfs mount option
-    * resize2fs doesn't seem to like read-only mounted filesystems during
-      online resizes
 * ship 6.1 experimental Debian kernel package instead
 * device tree package
     * fork u-boot-menu to allow version independent path for FDTs
