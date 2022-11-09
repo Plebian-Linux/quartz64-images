@@ -34,6 +34,15 @@ to use this image to its fullest potential, so you don't make yourself look
 like an idiot on YouTube as you "explain computers".
 
 
+## Developer Documentation
+
+For information on how to build images with this repository, see
+[HACKING.md](HACKING.md).
+
+For contribution guidelines and hints on how to achieve certain things in the
+preferred git workflow, please consult [CONTRIBUTING.md](CONTRIBUTING.md).
+
+
 ## TODO:
 
 * ship 6.1 experimental Debian kernel package instead
