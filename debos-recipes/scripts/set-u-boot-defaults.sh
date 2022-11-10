@@ -3,7 +3,7 @@ if [ "$BOARD" = "quartz64b" ] ; then
     FDT_NAME="rk3566-quartz64-b.dtb"
 elif [ "$BOARD" = "quartz64a" ] ; then
     FDT_NAME="rk3566-quartz64-a.dtb"
-elif [ "$BOARD" = "soquartz64-cm4" ] ; then
+elif [ "$BOARD" = "soquartz-cm4" ] ; then
     FDT_NAME="rk3566-soquartz-cm4.dtb"
 fi
 
