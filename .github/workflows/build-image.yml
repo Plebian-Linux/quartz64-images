@@ -16,6 +16,11 @@ jobs:
             uboot-name: "quartz64b"
           },
           {
+            name: "SOQuartz",
+            uboot-config: "soquartz-rk3566_defconfig",
+            uboot-name: "soquartz"
+          },
+          {
             name: "EVB",
             uboot-config: "evb-rk3568_defconfig",
             uboot-name: "evb-rk3568"
@@ -130,7 +135,7 @@ jobs:
           {
             name: "SOQuartz CM4 IO Board",
             debos-yaml: "debian-soquartz-cm4.yaml",
-            uboot-name: "evb-rk3568"
+            uboot-name: "soquartz"
           },
         ]
     runs-on: ubuntu-22.04
