@@ -50,7 +50,7 @@ jobs:
       - name: Fetch old rkbins
         run: |
           wget -q https://github.com/JeffyCN/rockchip_mirrors/blob/6186debcac95553f6b311cee10669e12c9c9963d/bin/rk35/rk3568_bl31_v1.28.elf?raw=true -O u-boot-quartz64/bl31.elf
-          wget -q https://github.com/JeffyCN/rockchip_mirrors/blob/47404a141a1acb7555906b5e3b097b5f1045cc21/bin/rk35/rk3568_ddr_1560MHz_v1.11.bin?raw=true -O u-boot-quartz64/ram_init.bin
+          wget -q https://github.com/rockchip-linux/rkbin/blob/a4c6de9ea29f275bb1d08c94ccded51ff2ab5b92/bin/rk35/rk3566_ddr_1056MHz_v1.13.bin?raw=true -O u-boot-quartz64/ram_init.bin
       - name: Build u-boot
         run: |
           cd u-boot-quartz64
