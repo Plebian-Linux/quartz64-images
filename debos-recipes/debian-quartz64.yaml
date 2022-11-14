@@ -15,6 +15,7 @@ actions:
       - main
       - contrib
       - non-free
+      - non-free-firmware
     mirror: {{ $mirror }}
   - action: apt
     description: Install base packages
