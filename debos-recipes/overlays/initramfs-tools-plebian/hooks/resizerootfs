@@ -31,6 +31,9 @@ copy_exec /usr/bin/test
 # from grep
 copy_exec /bin/grep
 
+# from logsave
+copy_exec /sbin/logsave
+
 # from parted
 copy_exec /sbin/parted
 copy_exec /sbin/partprobe
@@ -38,3 +41,4 @@ copy_exec /sbin/partprobe
 # from util-linux
 copy_exec /bin/lsblk
 copy_exec /sbin/blkid
+copy_exec /sbin/fsck
