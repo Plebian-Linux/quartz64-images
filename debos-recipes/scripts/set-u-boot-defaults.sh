@@ -1,3 +1,4 @@
+#!/bin/sh
 BOARD="$1"
 if [ "$BOARD" = "quartz64b" ] ; then
     FDT_NAME="rk3566-quartz64-b.dtb"
