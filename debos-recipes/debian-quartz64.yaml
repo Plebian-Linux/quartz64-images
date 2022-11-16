@@ -111,20 +111,11 @@ actions:
     source: overlays/initramfs-tools-plebian/
     destination: /etc/initramfs-tools/
 
-  - action: overlay
-    description: Copy kernel debs to /root
-    source: overlays/linux-kernel/
-    destination: /root/
-
   - action: run
-    description: Install linux kernel packages
+    description: Install kernel from Experimental
     chroot: true
-    command: dpkg -i /root/*.deb
-
-  - action: run
-    description: Clean up debs in /root
-    chroot: true
-    command: rm /root/*.deb
+    command: |
+      apt-get install -y linux-image-arm64 -t experimental
 
   - action: run
     description: Set up u-boot default file
