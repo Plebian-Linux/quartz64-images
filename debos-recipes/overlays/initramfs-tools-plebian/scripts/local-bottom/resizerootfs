@@ -1,7 +1,8 @@
 #!/bin/sh
 set -e
 
-# Shamelessly stolen from https://salsa.debian.org/raspi-team/image-specs/-/blob/master/rootfs/etc/initramfs-tools/scripts/local-bottom/rpi-resizerootfs
+# Shamelessly stolen from
+# https://salsa.debian.org/raspi-team/image-specs/-/blob/master/rootfs/etc/initramfs-tools/scripts/local-bottom/rpi-resizerootfs
 
 #
 # List the soft prerequisites here.  This is a space separated list of
@@ -35,9 +36,6 @@ fi
 
 log_begin_msg "$0 resizing $ROOT"
 
-# Unmount for safety
-# umount "${rootmnt}"
-
 # Expand the partition size to fill the entire device
 echo "Yes" | parted ---pretend-input-tty $rootdev resizepart $rootpart_nr 100%
 
@@ -47,19 +45,5 @@ wait_for_udev 5
 partprobe $rootdev
 
 wait_for_udev 5
-
-# We're gonna use systemd-growfs for this now
-#resize2fs $rootpart
-
-#wait_for_udev 5
-
-# HACK HACK HACK: Somehow I don't get the FSTYPE passed, and this cost hours
-# of my life to figure out. No, "auto" doesn't work here.
-#FSTYPE=${FSTYPE:-"ext4"}
-
-# Remount root
-#if ! mount -r -t "${FSTYPE}" ${ROOTFLAGS} "${ROOT}" "${rootmnt?}"; then
-#    panic "Failed to mount ${ROOT} as root file system."
-#fi
 
 log_end_msg
