@@ -17,6 +17,15 @@ actions:
       - non-free
       - non-free-firmware
     mirror: {{ $mirror }}
+
+  - action: run
+    description: Enable security repo
+    chroot: true
+    command: |
+      echo "" >> /etc/apt/sources.list
+      echo "# Bookworm security repo" >> /etc/apt/sources.list
+      echo "deb http://security.debian.org/debian-security bookworm-security main contrib non-free non-free-firmware" >> /etc/apt/sources.list
+
   - action: apt
     description: Install base packages
     recommends: true
