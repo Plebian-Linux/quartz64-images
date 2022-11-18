@@ -64,6 +64,7 @@ actions:
       - ncurses-term
       - bluetooth
       - gawk
+      - network-manager
 
   - action: run
     description: Install standard packages
@@ -78,11 +79,6 @@ actions:
     command: |
       echo "{{ $hostname }}" >/etc/hostname
       echo "127.0.0.1    localhost {{ $hostname }}" >/etc/hosts
-
-  - action: overlay
-    description: Copy interfaces.d config
-    source: overlays/interfaces.d/
-    destination: /etc/network/interfaces.d/
 
   - action: overlay
     description: Copy custom systemd units
