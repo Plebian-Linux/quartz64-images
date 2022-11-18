@@ -91,7 +91,7 @@ actions:
 
   - action: run
     description: Enable custom systemd units
-    chroot: True
+    chroot: true
     command: |
       mkdir -p /etc/systemd/system/multi-user.target.wants
       ln -s /usr/lib/systemd/system/regen-openssh-keys.service /etc/systemd/system/multi-user.target.wants/regen-openssh-keys.service
