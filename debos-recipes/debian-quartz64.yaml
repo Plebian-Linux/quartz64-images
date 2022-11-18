@@ -96,6 +96,14 @@ actions:
       mkdir -p /etc/systemd/system/multi-user.target.wants
       ln -s /usr/lib/systemd/system/regen-openssh-keys.service /etc/systemd/system/multi-user.target.wants/regen-openssh-keys.service
 
+  - action: run
+    description: Enable Bookworm updates repo
+    chroot: true
+    command: |
+      echo "" >> /etc/apt/sources.list
+      echo "# Bookworm updates repo" >> /etc/apt/sources.list
+      echo "deb http://deb.debian.org/debian bookworm-updates main contrib non-free non-free-firmware" >> /etc/apt/sources.list
+
   - action: overlay
     description: Copy initramfs from Plebian
     source: overlays/initramfs-tools-plebian/
