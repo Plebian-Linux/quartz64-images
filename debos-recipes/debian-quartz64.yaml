@@ -93,6 +93,11 @@ actions:
     destination: /etc/initramfs-tools/
 
   - action: overlay
+    description: Copy apt config for Experimental
+    source: overlays/apt/
+    destination: /etc/apt/
+
+  - action: overlay
     description: Copy kernel debs to /root
     source: overlays/linux-kernel/
     destination: /root/
