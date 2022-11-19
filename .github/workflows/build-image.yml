@@ -137,6 +137,16 @@ jobs:
             debos-yaml: "debian-soquartz-cm4.yaml",
             uboot-name: "soquartz"
           },
+          {
+            name: "SOQuartz Blade",
+            debos-yaml: "debian-soquartz-blade.yaml",
+            uboot-name: "soquartz"
+          },
+          {
+            name: "SOQuartz Model A",
+            debos-yaml: "debian-soquartz-model-a.yaml",
+            uboot-name: "soquartz"
+          },
         ]
     runs-on: ubuntu-22.04
     needs:
