@@ -30,6 +30,10 @@ install --mode=644 linux-quartz64-deploy/arch/arm64/boot/dts/rockchip/rk3566-qua
     data/usr/lib/devicetrees-plebian-quartz64/rockchip/
 install --mode=644 linux-quartz64-deploy/arch/arm64/boot/dts/rockchip/rk3566-soquartz-cm4.dtb \
     data/usr/lib/devicetrees-plebian-quartz64/rockchip/
+install --mode=644 linux-quartz64-deploy/arch/arm64/boot/dts/rockchip/rk3566-soquartz-blade.dtb \
+    data/usr/lib/devicetrees-plebian-quartz64/rockchip/
+install --mode=644 linux-quartz64-deploy/arch/arm64/boot/dts/rockchip/rk3566-soquartz-model-a.dtb \
+    data/usr/lib/devicetrees-plebian-quartz64/rockchip/
 
 ./debil.sh "$DTDEB_OUTNAME" "$DTDEB_VERSION" "$DTDEB_REVISION"
 
