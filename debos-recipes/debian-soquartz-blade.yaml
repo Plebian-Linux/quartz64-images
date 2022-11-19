@@ -1,0 +1,9 @@
+{{- $board := or .board "soquartz-blade" -}}
+
+architecture: "arm64"
+
+actions:
+  - action: recipe
+    recipe: "debian-quartz64.yaml"
+    variables:
+      board: {{ $board }}

@@ -6,6 +6,10 @@ elif [ "$BOARD" = "quartz64a" ] ; then
     FDT_NAME="rk3566-quartz64-a.dtb"
 elif [ "$BOARD" = "soquartz-cm4" ] ; then
     FDT_NAME="rk3566-soquartz-cm4.dtb"
+elif [ "$BOARD" = "soquartz-blade" ] ; then
+    FDT_NAME="rk3566-soquartz-blade.dtb"
+elif [ "$BOARD" = "soquartz-model-a" ] ; then
+    FDT_NAME="rk3566-soquartz-model-a.dtb"
 fi
 
 cat <<EOF >> /etc/default/u-boot
