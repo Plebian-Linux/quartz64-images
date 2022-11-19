@@ -18,7 +18,7 @@ fi
 
 mkdir -p control
 cat <<EOF > control/control
-Package: devicetrees-plebian-quartz64-$2
+Package: devicetrees-plebian-quartz64
 Source: linux-upstream
 Version: $2-$3
 Architecture: arm64
