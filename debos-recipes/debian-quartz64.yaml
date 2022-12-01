@@ -19,15 +19,29 @@ actions:
     mirror: {{ $mirror }}
 
   - action: run
-    description: Enable security repo
+    description: Enable Bookworm security repo
     chroot: true
     command: |
       echo "" >> /etc/apt/sources.list
       echo "# Bookworm security repo" >> /etc/apt/sources.list
       echo "deb http://security.debian.org/debian-security bookworm-security main contrib non-free non-free-firmware" >> /etc/apt/sources.list
 
+  - action: run
+    description: Enable Bookworm updates repo
+    chroot: true
+    command: |
+      echo "" >> /etc/apt/sources.list
+      echo "# Bookworm updates repo" >> /etc/apt/sources.list
+      echo "deb http://deb.debian.org/debian bookworm-updates main contrib non-free non-free-firmware" >> /etc/apt/sources.list
+
+  - action: overlay
+    description: Copy apt config for Sid and Experimental
+    source: overlays/apt/
+    destination: /etc/apt/
+
   - action: apt
     description: Install base packages
+    update: true
     recommends: true
     packages:
       - sudo
@@ -92,23 +106,10 @@ actions:
       mkdir -p /etc/systemd/system/multi-user.target.wants
       ln -s /usr/lib/systemd/system/regen-openssh-keys.service /etc/systemd/system/multi-user.target.wants/regen-openssh-keys.service
 
-  - action: run
-    description: Enable Bookworm updates repo
-    chroot: true
-    command: |
-      echo "" >> /etc/apt/sources.list
-      echo "# Bookworm updates repo" >> /etc/apt/sources.list
-      echo "deb http://deb.debian.org/debian bookworm-updates main contrib non-free non-free-firmware" >> /etc/apt/sources.list
-
   - action: overlay
     description: Copy initramfs from Plebian
     source: overlays/initramfs-tools-plebian/
     destination: /etc/initramfs-tools/
-
-  - action: overlay
-    description: Copy apt config for Experimental
-    source: overlays/apt/
-    destination: /etc/apt/
 
   - action: overlay
     description: Copy kernel debs to /root
