@@ -1,1 +1,1 @@
-deb https://deb.debian.org/debian sid contrib non-free non-free-firmware
+deb https://deb.debian.org/debian sid main contrib non-free non-free-firmware

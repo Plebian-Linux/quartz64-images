@@ -1,1 +1,1 @@
-APT::Default-Release "bookworm";
+APT::Default-Release "/^bookworm(|-security|-updates)$/";
