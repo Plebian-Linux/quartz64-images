@@ -26,7 +26,6 @@ Maintainer: Nicolas Frattaroli <frattaroli.nicolas@gmail.com>
 Installed-Size: $(du -s data/ | cut -f1)
 Section: kernel
 Priority: optional
-Depends: python3
 Homepage: https://github.com/Plebian-Linux/quartz64-images
 Description: Plebian specific device trees for Quartz64
  This package contains device trees for booting and running

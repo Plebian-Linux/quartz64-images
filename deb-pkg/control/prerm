@@ -1,39 +1,6 @@
-#!/usr/bin/env python3
-import subprocess
-import sys
-import re
+#!/bin/sh
 
-FDT_FILE_RE="^U_BOOT_FDT=\"?usr/lib/devicetrees-plebian-quartz64/rockchip/(?P<fdt>[\\w\\-]+)\\.dtb\"?\\s*(#.*)?\\s*$"
-FDT_DIR_RE="^U_BOOT_FDT_DIR=\"?\"?\\s*(#.*)?\\s*$"
+set -e
 
-SHIPPED_DTBS = [
-    "rk3566-quartz64-a",
-    "rk3566-quartz64-b",
-    "rk3566-soquartz-cm4",
-    "rk3566-soquartz-blade",
-    "rk3566-soquartz-model-a",
-]
-
-successful = False
-dir_successful = False
-lines = []
-
-with open("/etc/default/u-boot", 'r') as f:
-    for line in f:
-        m = re.fullmatch(FDT_FILE_RE, line)
-        if m:
-            if m.group("fdt") in SHIPPED_DTBS:
-                successful = True
-                line = "U_BOOT_FDT=\"rockchip/{0}.dtb\"\n".format(m.group("fdt"))
-        else:
-            m = re.fullmatch(FDT_DIR_RE, line)
-            if m:
-                dir_successful = True
-                line = "U_BOOT_FDT_DIR=\"/usr/lib/linux-image-\"\n"
-        lines.append(line)
-if successful and dir_successful:
-    with open("/etc/default/u-boot", 'w') as out_file:
-        for line in lines:
-            out_file.write(line)
-
-sys.exit(subprocess.run(["u-boot-update"]).returncode)
+rm -f /usr/share/u-boot-menu/conf.d/20-plebian-dtbs.conf
+u-boot-update
