@@ -12,7 +12,8 @@ elif [ "$BOARD" = "soquartz-model-a" ] ; then
     FDT_NAME="rk3566-soquartz-model-a.dtb"
 fi
 
-cat <<EOF > /etc/default/u-boot
+mkdir -p /usr/share/u-boot-menu/conf.d/
+cat <<EOF > /usr/share/u-boot-menu/conf.d/10-plebian.conf
 ## /etc/default/u-boot - configuration file for u-boot-update(8)
 
 #U_BOOT_UPDATE="true"
