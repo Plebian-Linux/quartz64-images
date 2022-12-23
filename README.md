@@ -45,19 +45,9 @@ preferred git workflow, please consult [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## TODO:
 
-* ship 6.1 experimental Debian kernel package instead
-* device tree package
-    * fork u-boot-menu to allow version independent path for FDTs
-    * add said u-boot-menu fork to the workflow, install it onto the image
-    * have a post install script in the package that finds-and-replaces the
-      vanilla FDT path with the plebian one, and runs u-boot-update
-    * have a post (or pre?) remove script in the package that finds-and-replaces
-      the plebian FDT path with the vanilla one, and runs u-boot-update
-* repository-ing the devicetree and u-boot-menu package
-    * pushing the packages from the pipeline to a repository
-    * rebuilding the repository on incoming packages
-    * versioning???? (probably git describe on the kernel source tree)
-    * adding the repository to the images in apt sources
+* ship the 6.1.x Debian kernel package instead
+* Plebian landing page with the freshest image download links and flashing
+  instructions
 * ***First Public "Beta" Release Here***
     * forum post
     * wiki listing
@@ -69,5 +59,3 @@ preferred git workflow, please consult [CONTRIBUTING.md](CONTRIBUTING.md).
 * generate ubuntu based images
 * add more SOQuartz baseboards as I (or someone else) mainlines device trees for
   them.
-* Plebian landing page with the freshest image download links and flashing
-  instructions
