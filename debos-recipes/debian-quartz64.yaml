@@ -127,13 +127,6 @@ actions:
     command: rm /root/*.deb
 
   - action: run
-    description: Install unstable u-boot-menu
-    chroot: true
-    command: |
-      apt-get update
-      apt-get install -y u-boot-menu -t unstable
-
-  - action: run
     description: Set up u-boot default file
     chroot: true
     script: scripts/set-u-boot-defaults.sh {{ $board }}
