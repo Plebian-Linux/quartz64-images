@@ -14,7 +14,10 @@ fi
 
 mkdir -p /usr/share/u-boot-menu/conf.d/
 cat <<EOF > /usr/share/u-boot-menu/conf.d/10-plebian.conf
-## /etc/default/u-boot - configuration file for u-boot-update(8)
+## /usr/share/u-boot-menu/conf.d/10-plebian.conf - configuration file for u-boot-update(8)
+## AUTOMATICALLY GENERATED FILE - DO NOT EDIT!
+## Instead, put your configuration into /etc/u-boot-menu/conf.d/*.conf
+## Files there will override values of config fragments in this directory
 
 #U_BOOT_UPDATE="true"
 
