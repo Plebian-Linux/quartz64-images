@@ -1,8 +1,5 @@
 # Plebian Quartz64 Images
 
-***This is a work-in-progress project. Things don't work yet. Please do not
-flash these images yet unless you are trying to help develop this pipeline.***
-
 This repository contains the GitHub workflow files and debos recipes to create
 custom Debian-based operating system images for the Quartz64 line of SBCs from
 PINE64, including the SOQuartz.
@@ -30,8 +27,7 @@ that is being updated.
 ## User Documentation
 
 Please see [RUNNING.md](RUNNING.md) for various collected notes regarding how
-to use this image to its fullest potential, so you don't make yourself look
-like an idiot on YouTube as you "explain computers".
+to use this image to its fullest potential.
 
 
 ## Developer Documentation
@@ -45,7 +41,6 @@ preferred git workflow, please consult [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## TODO:
 
-* ship the 6.1.x Debian kernel package instead
 * Plebian landing page with the freshest image download links and flashing
   instructions
 * ***First Public "Beta" Release Here***
