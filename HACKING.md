@@ -22,12 +22,6 @@ We need a few files:
 * `debos-recipes/u-boot/idbloader.img`: SPL u-boot image, feel free to grab it
   from a previous actions run, or build it yourself from the u-boot sources.
 * `debos-recipes/u-boot/u-boot.itb`: Main u-boot image, ditto on that.
-* `debos-recipes/overlays/linux-kernel/yourkernelhere.deb`: A Debian-installable
-  linux kernel package. You can build it on a Debian-like host (not Ubuntu 21.10
-  or later for dpkg zstd reasons) with `make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- -j$(nproc) deb-pkg`
-  in a checkout of the kernel tree, provided you configured the kernel first
-  with the provided config (`cp config path/to/your/clone/.config && make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- olddefconfig`),
-  or just download it from a previous actions run.
 
 ### Running the build
 
