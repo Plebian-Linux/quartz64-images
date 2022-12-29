@@ -63,40 +63,40 @@ jobs:
           path: |
             u-boot-quartz64/u-boot.itb
             u-boot-quartz64/idbloader.img
-  build_kernel:
-    runs-on: self-hosted
-    steps:
-      - name: Clone workflow repository
-        uses: actions/checkout@v3
-      - name: Install toolchain
-        run: |
-            sudo apt-get -yq update && sudo apt-get -yq upgrade
-            sudo apt-get -yq install build-essential crossbuild-essential-arm64 device-tree-compiler \
-            autoconf bc bison flex ccache cpio dkms fakeroot kmod quilt rsync dh-exec \
-            libssl-dev libncurses-dev libelf-dev libudev-dev libpci-dev libiberty-dev
-      - name: Clone kernel repository
-        uses: actions/checkout@v3
-        with:
-          repository: 'CounterPillow/linux'
-          ref: 'quartz64-deploy'
-          path: 'linux'
-      - name: Make config
-        run: |
-          cp config linux/.config
-          cd linux
-          make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- olddefconfig
-      - name: Build kernel
-        run: |
-          cd linux
-          make -j$(nproc) ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- deb-pkg
-      - name: Archive kernel artifacts
-        uses: actions/upload-artifact@v3
-        with:
-          name: linux-kernel
-          path: |
-            linux-image-*.deb
-            linux-libc-dev*.deb
-            !linux-image-*dbg*.deb
+  # build_kernel:
+  #   runs-on: self-hosted
+  #   steps:
+  #     - name: Clone workflow repository
+  #       uses: actions/checkout@v3
+  #     - name: Install toolchain
+  #       run: |
+  #           sudo apt-get -yq update && sudo apt-get -yq upgrade
+  #           sudo apt-get -yq install build-essential crossbuild-essential-arm64 device-tree-compiler \
+  #           autoconf bc bison flex ccache cpio dkms fakeroot kmod quilt rsync dh-exec \
+  #           libssl-dev libncurses-dev libelf-dev libudev-dev libpci-dev libiberty-dev
+  #     - name: Clone kernel repository
+  #       uses: actions/checkout@v3
+  #       with:
+  #         repository: 'CounterPillow/linux'
+  #         ref: 'quartz64-deploy'
+  #         path: 'linux'
+  #     - name: Make config
+  #       run: |
+  #         cp config linux/.config
+  #         cd linux
+  #         make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- olddefconfig
+  #     - name: Build kernel
+  #       run: |
+  #         cd linux
+  #         make -j$(nproc) ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- deb-pkg
+  #     - name: Archive kernel artifacts
+  #       uses: actions/upload-artifact@v3
+  #       with:
+  #         name: linux-kernel
+  #         path: |
+  #           linux-image-*.deb
+  #           linux-libc-dev*.deb
+  #           !linux-image-*dbg*.deb
   build_dt_debs:
     runs-on: ubuntu-latest
     steps:
@@ -151,7 +151,7 @@ jobs:
     runs-on: ubuntu-22.04
     needs:
       - build_uboot
-      - build_kernel
+      # - build_kernel
     env:
       GOPATH: /opt/src/gocode
     steps:
@@ -162,11 +162,11 @@ jobs:
         with:
           name: u-boot-${{ matrix.boards.uboot-name}}
           path: debos-recipes/u-boot/
-      - name: Download kernel artifacts
-        uses: actions/download-artifact@v3
-        with:
-          name: linux-kernel
-          path: debos-recipes/overlays/linux-kernel/
+      # - name: Download kernel artifacts
+      #   uses: actions/download-artifact@v3
+      #   with:
+      #     name: linux-kernel
+      #     path: debos-recipes/overlays/linux-kernel/
       - name: Install debos dependencies
         run: |
           sudo apt-get update
