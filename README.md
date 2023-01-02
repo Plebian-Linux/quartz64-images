@@ -13,6 +13,7 @@ that is being updated.
 
 * u-boot: https://github.com/CounterPillow/u-boot-quartz64/tree/deploy
 * kernel: https://github.com/CounterPillow/linux/tree/quartz64-deploy
+  - unused at the moment
 
 
 ## Current Features
@@ -41,12 +42,6 @@ preferred git workflow, please consult [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## TODO:
 
-* Plebian landing page with the freshest image download links and flashing
-  instructions
-* ***First Public "Beta" Release Here***
-    * forum post
-    * wiki listing
-    * tweet?
 * package the wireless firmware
 * get a newer rkbin working with u-boot
 * base pg's stuff on a newer version of u-boot
