@@ -1,5 +1,12 @@
 name: Build Quartz64 Images
-on: workflow_dispatch
+on:
+    workflow_dispatch:
+      inputs:
+        release-version:
+          description: 'Release Version'
+          required: false
+          default: 'unreleased'
+          type: string
 jobs:
   build_uboot:
     strategy:
@@ -183,3 +190,21 @@ jobs:
           name: ${{ matrix.boards.name }} Image
           path: |
             *.img.xz
+  do_release:
+    runs-on: ubuntu-latest
+    if: ${{ inputs.release-version != 'unreleased' }}
+    needs:
+      - build_image
+      - build_dt_debs
+    steps:
+      - name: Download image artifacts
+        uses: actions/download-artifact@v3
+        with:
+          path: artifacts/
+      - name: Make release
+        uses: softprops/action-gh-release@v0.1.15
+        with:
+          name: ${{ inputs.release-version }}
+          files: |
+            artifacts/**/plebian*.img.xz
+            artifacts/devicetrees-plebian-quartz64/devicetrees-plebian-*.deb
