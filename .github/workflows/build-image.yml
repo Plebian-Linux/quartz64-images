@@ -197,6 +197,8 @@ jobs:
       - build_image
       - build_dt_debs
     steps:
+      - name: Clone workflow repository
+        uses: actions/checkout@v3
       - name: Download image artifacts
         uses: actions/download-artifact@v3
         with:
