@@ -35,7 +35,7 @@ actions:
       echo "deb http://deb.debian.org/debian bookworm-updates main contrib non-free non-free-firmware" >> /etc/apt/sources.list
 
   - action: overlay
-    description: Copy apt config for Sid and Experimental
+    description: Copy apt config for Sid
     source: overlays/apt/
     destination: /etc/apt/
 
