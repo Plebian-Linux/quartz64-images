@@ -35,7 +35,7 @@ actions:
       echo "deb http://deb.debian.org/debian bookworm-updates main contrib non-free non-free-firmware" >> /etc/apt/sources.list
 
   - action: overlay
-    description: Copy apt config for Sid and Experimental
+    description: Copy apt config for Sid
     source: overlays/apt/
     destination: /etc/apt/
 
@@ -112,10 +112,10 @@ actions:
     destination: /etc/initramfs-tools/
 
   - action: run
-    description: Install kernel from Experimental
+    description: Install kernel from Sid
     chroot: true
     command: |
-      apt-get install -y linux-image-arm64 -t experimental
+      apt-get install -y linux-image-arm64 -t sid
 
   - action: run
     description: Set up u-boot default file
