@@ -107,6 +107,16 @@ actions:
       ln -s /usr/lib/systemd/system/regen-openssh-keys.service /etc/systemd/system/multi-user.target.wants/regen-openssh-keys.service
 
   - action: overlay
+    description: Copy resolved config fragments
+    source: overlays/resolved/
+    destination: /usr/lib/systemd/resolved.conf.d/
+
+  - action: overlay
+    description: Copy NetworkManager config fragments
+    source: overlays/networkmanager/
+    destination: /usr/lib/NetworkManager/conf.d/
+
+  - action: overlay
     description: Copy initramfs from Plebian
     source: overlays/initramfs-tools-plebian/
     destination: /etc/initramfs-tools/
