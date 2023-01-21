@@ -78,10 +78,3 @@ as browsers do not yet support this API.
 Plebian (or Debian, for that matter) does not yet properly package the wireless
 firmware needed for the Model B or SOQuartz's Wi-Fi chip. Therefore, Wi-Fi won't
 work out of the box.
-
-### Flakey SD Boot
-
-About every fourth boot from some SD cards may fail in u-boot. This is a known
-issue in the version of u-boot Plebian currently uses. When or how this will be
-fixed is not yet known; if you want to boot reliably, it is recommended to use
-eMMC.
