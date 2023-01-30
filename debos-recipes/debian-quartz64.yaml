@@ -44,41 +44,40 @@ actions:
     update: true
     recommends: true
     packages:
-      - sudo
-      - openssh-server
-      - vim
-      - u-boot-menu
-      - initramfs-tools
-      - ca-certificates
-      - man-db
-      - console-setup
-      - console-data
-      - parted
-      - bash-completion
-      - xz-utils
-      - zstd
-      - ssh
-      - wget
-      - file
       - alsa-utils
+      - bash-completion
+      - bluetooth
+      - bzip2
+      - ca-certificates
+      - console-data
+      - console-setup
       - dbus-broker
-      - systemd-resolved
-      - systemd-timesyncd
+      - e2fsprogs
+      - file
+      - gawk
+      - initramfs-tools
+      - liblockfile-bin
+      - libnss-systemd
       - libpam-systemd
       - locales
-      - manpages
-      - pciutils
-      - bzip2
       - lsof
-      - traceroute
-      - libnss-systemd
-      - liblockfile-bin
-      - e2fsprogs
-      - parted
+      - man-db
+      - manpages
       - ncurses-term
-      - bluetooth
-      - gawk
       - network-manager
+      - openssh-server
+      - parted
+      - pciutils
+      - ssh
+      - sudo
+      - systemd-resolved
+      - systemd-timesyncd
+      - traceroute
+      - u-boot-menu
+      - vim
+      - wget
+      - xz-utils
+      - zstd
 
   - action: run
     description: Install standard packages
