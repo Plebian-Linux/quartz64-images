@@ -37,12 +37,10 @@ jobs:
       #  with:
       #    repository: 'rockchip-linux/rkbin'
       #    path: 'rkbin'
-      - name: Clone u-boot repository
+      - name: Clone workflow repository
         uses: actions/checkout@v3
         with:
-          repository: 'CounterPillow/u-boot-quartz64'
-          ref: 'deploy'
-          path: 'u-boot-quartz64'
+            submodules: true
       - name: Clean u-boot
         run: |
           cd u-boot-quartz64
