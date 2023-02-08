@@ -78,3 +78,14 @@ as browsers do not yet support this API.
 Plebian (or Debian, for that matter) does not yet properly package the wireless
 firmware needed for the Model B or SOQuartz's Wi-Fi chip. Therefore, Wi-Fi won't
 work out of the box.
+
+
+## Further Reading
+
+This section lists articles about Plebian by various other sources that may be
+worth looking into if you're looking for information on how to use your system.
+
+### [Quartz64 NAS by nathmo](https://github.com/nathmo/Quartz64_NAS/blob/main/README.md)
+
+This article goes in-depth about how to use Plebian on a Quartz64 Model A to set
+up a NAS.
