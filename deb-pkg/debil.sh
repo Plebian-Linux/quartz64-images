@@ -40,8 +40,8 @@ cd data
 echo $(find . -type f -exec md5sum {} \;) >> ../control/md5sums
 cd ..
 
-tar --create --file control.tar.xz --xz -C control .
-tar --create --file data.tar.xz --xz -C data .
+tar --create --file control.tar.xz --xz -C control --group root --owner root .
+tar --create --file data.tar.xz --xz -C data --group root --owner root .
 ar q "$1" debian-binary control.tar.xz data.tar.xz
 rm -f control.tar.xz
 rm -f data.tar.xz
