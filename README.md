@@ -11,7 +11,7 @@ that is being updated.
 
 ## Sources
 
-* u-boot: https://github.com/CounterPillow/u-boot-quartz64/tree/deploy
+* u-boot: https://github.com/CounterPillow/u-boot-quartz64/tree/mainline-ish-2
 * kernel: https://github.com/CounterPillow/linux/tree/quartz64-deploy
   - unused at the moment
 
@@ -43,9 +43,6 @@ preferred git workflow, please consult [CONTRIBUTING.md](CONTRIBUTING.md).
 ## TODO:
 
 * package the wireless firmware
-* get a newer rkbin working with u-boot
-* base pg's stuff on a newer version of u-boot
-* get FDT overlays working in u-boot
 * generate ubuntu based images
 * add more SOQuartz baseboards as I (or someone else) mainlines device trees for
   them.
