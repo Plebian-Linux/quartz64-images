@@ -18,7 +18,7 @@ cd linux-quartz64-deploy
 make mrproper
 cp ../../config .config
 make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- olddefconfig
-make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- dtbs
+make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- DTC_FLAGS="-@" dtbs
 cd ..
 
 # Install to data folder
