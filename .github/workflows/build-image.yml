@@ -16,9 +16,19 @@ jobs:
             uboot-name: "quartz64b"
           },
           {
-            name: "SOQuartz",
-            uboot-config: "soquartz-rk3566_defconfig",
-            uboot-name: "soquartz"
+            name: "SOQuartz Blade",
+            uboot-config: "soquartz-blade-rk3566_defconfig",
+            uboot-name: "soquartz-blade"
+          },
+          {
+            name: "SOQuartz CM4IO",
+            uboot-config: "soquartz-cm4io-rk3566_defconfig",
+            uboot-name: "soquartz-cm4io"
+          },
+          {
+            name: "SOQuartz Model A",
+            uboot-config: "soquartz-model-a-rk3566_defconfig",
+            uboot-name: "soquartz-model-a"
           },
           {
             name: "EVB",
@@ -31,7 +41,7 @@ jobs:
       - name: Install toolchain
         run: |
             sudo apt-get update
-            sudo apt-get install build-essential crossbuild-essential-arm64 device-tree-compiler
+            sudo apt-get install build-essential crossbuild-essential-arm64 device-tree-compiler python3-pyelftools
       #- name: Clone rkbin repository
       #  uses: actions/checkout@v3
       #  with:
@@ -45,13 +55,15 @@ jobs:
         run: |
           cd u-boot-quartz64
           make mrproper
-      - name: Fetch old rkbins
+      - name: Fetch rkbins
         run: |
-          wget -q https://github.com/JeffyCN/rockchip_mirrors/blob/6186debcac95553f6b311cee10669e12c9c9963d/bin/rk35/rk3568_bl31_v1.28.elf?raw=true -O u-boot-quartz64/bl31.elf
-          wget -q https://github.com/rockchip-linux/rkbin/blob/a4c6de9ea29f275bb1d08c94ccded51ff2ab5b92/bin/rk35/rk3566_ddr_1056MHz_v1.13.bin?raw=true -O u-boot-quartz64/ram_init.bin
+          wget -q https://github.com/rockchip-linux/rkbin/blob/87885c48747a358dc8eb1808db99e313935e129e/bin/rk35/rk3568_bl31_v1.34.elf?raw=true -O u-boot-quartz64/rk3568_bl31_v1.34.elf
+          wget -q https://github.com/rockchip-linux/rkbin/blob/a4c6de9ea29f275bb1d08c94ccded51ff2ab5b92/bin/rk35/rk3566_ddr_1056MHz_v1.13.bin?raw=true -O u-boot-quartz64/rk3566_ddr_1056MHz_v1.13.bin
       - name: Build u-boot
         run: |
           cd u-boot-quartz64
+          export ROCKCHIP_TPL=rk3566_ddr_1056MHz_v1.13.bin
+          export BL31=rk3568_bl31_v1.34.elf
           make ARCH=arm CROSS_COMPILE=aarch64-linux-gnu- ${{ matrix.boards.uboot-config }}
           make ARCH=arm CROSS_COMPILE=aarch64-linux-gnu- -j$(nproc)
       - name: Archive u-boot artifacts
@@ -133,17 +145,17 @@ jobs:
           {
             name: "SOQuartz CM4 IO Board",
             debos-yaml: "debian-soquartz-cm4.yaml",
-            uboot-name: "soquartz"
+            uboot-name: "soquartz-cm4io"
           },
           {
             name: "SOQuartz Blade",
             debos-yaml: "debian-soquartz-blade.yaml",
-            uboot-name: "soquartz"
+            uboot-name: "soquartz-blade"
           },
           {
             name: "SOQuartz Model A",
             debos-yaml: "debian-soquartz-model-a.yaml",
-            uboot-name: "soquartz"
+            uboot-name: "soquartz-model-a"
           },
         ]
     runs-on: ubuntu-22.04
