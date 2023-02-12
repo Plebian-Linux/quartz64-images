@@ -42,6 +42,8 @@ preferred git workflow, please consult [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## TODO:
 
+* get device tree blobs with symbols onto the images so overlays can be
+  applied
 * package the wireless firmware
 * generate ubuntu based images
 * add more SOQuartz baseboards as I (or someone else) mainlines device trees for
