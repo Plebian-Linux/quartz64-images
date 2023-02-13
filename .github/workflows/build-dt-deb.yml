@@ -1,0 +1,29 @@
+name: Build Device Tree Debs
+on:
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: "Publish the resulting package"
+        type: boolean
+jobs:
+  build_dt_debs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone workflow repository
+        uses: actions/checkout@v3
+      - name: Install toolchain
+        run: |
+            sudo apt-get -yq update && sudo apt-get -yq upgrade
+            sudo apt-get -yq install build-essential crossbuild-essential-arm64 device-tree-compiler \
+            autoconf bc bison flex ccache cpio dkms fakeroot kmod quilt rsync dh-exec \
+            libssl-dev libncurses-dev libelf-dev libudev-dev libpci-dev libiberty-dev
+      - name: Build Device Tree Deb Package
+        run: |
+          cd deb-pkg
+          ./build-devicetree-deb.sh
+      - name: Archive Device Tree Debs
+        uses: actions/upload-artifact@v3
+        with:
+          name: devicetrees-plebian-quartz64
+          path: |
+            deb-pkg/*.deb
