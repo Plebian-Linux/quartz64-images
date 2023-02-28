@@ -1,5 +1,5 @@
 Types: deb
-URIs: https://aptly.fratti.ch/bookworm/
+URIs: https://aptly.fratti.ch/debian/
 Suites: bookworm
 Components: main
 Signed-By: /usr/share/keyrings/plebian-build-key.gpg
