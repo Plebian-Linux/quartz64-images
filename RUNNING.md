@@ -39,6 +39,13 @@ You'll then want to force WebRender on in `about:config`, but I forgor 💀 how 
 do that.
 
 
+## Upgrading
+
+Generally, the usual `apt update && apt upgrade` will work. Occasionally
+however, manual intervention is required. In such cases, please consult
+[UPGRADING.md](UPGRADING.md).
+
+
 ## Known Limitations
 
 Here are some known limitations of either software or hardware you should know

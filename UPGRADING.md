@@ -1,0 +1,40 @@
+# Manual Intervention For Upgrades
+
+Not all of Plebian's stuff is packages in a way where apt can upgrade it as
+of the time of writing. That's why occasionally, manual intervention is needed
+to fully transition from an earlier release of Plebian to a newer one. This
+document tells you how to do this depending on what release you're updating
+from.
+
+If you're in need of doing multiple upgrades, do them in order.
+
+
+## From 2023.01.* to 2023.02.28
+
+During this upgrade, u-boot will need to be updated. The third party repository
+needs to be added as well.
+
+### Upgrading u-boot
+
+1. Find the latest release for your device [from the Actions workflow](https://github.com/Plebian-Linux/quartz64-images/actions/workflows/build-image.yml).
+2. Unzip it so that you have `idbloader.img` and `u-boot.itb`
+3. Find the device you have u-boot on with `lsblk`, it's probably the one your
+   `/` resides on as well, i.e. `/dev/mmcblk0` for SD and `/dev/mmcblk1` for
+   eMMC.
+4. Flash `idbloader.img` to `p1` of that device, e.g.
+   `sudo dd if=idbloader.img of=/dev/mmcblk0p1 oflag=dsync bs=4096`
+   Remember to change `/dev/mmcblk0p1` to `/dev/mmcblk1p1` if you're using eMMC.
+5. Flash `u-boot.itb` to `p2` of that device, e.g.
+   `sudo dd if=u-boot.itb of=/dev/mmcblk0p2 oflag=dsync bs=4096`
+   Remember to change `/dev/mmcblk0p2` to `/dev/mmcblk1p2` if you're using eMMC.
+
+### Adding The Plebian Repo
+
+Run the following:
+
+```
+sudo curl https://raw.githubusercontent.com/Plebian-Linux/quartz64-images/c2e5a4864a9cd41ebe9ba2671c564dc36ab2c87a/debos-recipes/overlays/apt/sources.list.d/plebian.sources -o /etc/apt/sources.list.d/plebian.sources
+sudo curl https://github.com/Plebian-Linux/quartz64-images/raw/c2e5a4864a9cd41ebe9ba2671c564dc36ab2c87a/debos-recipes/overlays/keyrings/plebian-build-key.gpg -o /usr/share/keyrings/plebian-build-key.gpg
+sudo apt update
+sudo apt install devicetrees-plebian-quartz64
+```
