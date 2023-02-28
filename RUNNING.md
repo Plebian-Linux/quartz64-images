@@ -92,6 +92,11 @@ work out of the box.
 This section lists articles about Plebian by various other sources that may be
 worth looking into if you're looking for information on how to use your system.
 
+### [Device Tree Overlays](DT_OVERLAYS.md)
+
+Documentation on how to use device tree overlays on Plebian, to interface with
+e.g. "maker" sensors.
+
 ### [Quartz64 NAS by nathmo](https://github.com/nathmo/Quartz64_NAS/blob/main/README.md)
 
 This article goes in-depth about how to use Plebian on a Quartz64 Model A to set
