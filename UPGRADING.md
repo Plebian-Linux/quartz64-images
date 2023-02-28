@@ -33,8 +33,8 @@ needs to be added as well.
 Run the following:
 
 ```
-sudo curl https://raw.githubusercontent.com/Plebian-Linux/quartz64-images/c2e5a4864a9cd41ebe9ba2671c564dc36ab2c87a/debos-recipes/overlays/apt/sources.list.d/plebian.sources -o /etc/apt/sources.list.d/plebian.sources
-sudo curl https://github.com/Plebian-Linux/quartz64-images/raw/c2e5a4864a9cd41ebe9ba2671c564dc36ab2c87a/debos-recipes/overlays/keyrings/plebian-build-key.gpg -o /usr/share/keyrings/plebian-build-key.gpg
+sudo curl -L https://raw.githubusercontent.com/Plebian-Linux/quartz64-images/main/debos-recipes/overlays/apt/sources.list.d/plebian.sources -o /etc/apt/sources.list.d/plebian.sources
+sudo curl -L https://github.com/Plebian-Linux/quartz64-images/raw/main/debos-recipes/overlays/keyrings/plebian-build-key.gpg -o /usr/share/keyrings/plebian-build-key.gpg
 sudo apt update
 sudo apt install devicetrees-plebian-quartz64
 ```
