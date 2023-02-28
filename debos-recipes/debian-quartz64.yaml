@@ -35,7 +35,12 @@ actions:
       echo "deb http://deb.debian.org/debian bookworm-updates main contrib non-free non-free-firmware" >> /etc/apt/sources.list
 
   - action: overlay
-    description: Copy apt config for Sid
+    description: Copy Plebian keyring
+    source: overlays/keyrings/
+    destination: /usr/share/keyrings/
+
+  - action: overlay
+    description: Copy apt config for Sid and Plebian
     source: overlays/apt/
     destination: /etc/apt/
 
@@ -136,6 +141,13 @@ actions:
     description: Run u-boot-update
     chroot: true
     command: u-boot-update
+
+  - action: apt
+    description: Install Plebian devicetrees
+    update: true
+    recommends: true
+    packages:
+      - devicetrees-plebian-quartz64
 
   - action: run
     description: Set up user
