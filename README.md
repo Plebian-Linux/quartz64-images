@@ -46,3 +46,17 @@ preferred git workflow, please consult [CONTRIBUTING.md](CONTRIBUTING.md).
 * generate ubuntu based images
 * add more SOQuartz baseboards as I (or someone else) mainlines device trees for
   them.
+
+
+## Donations
+
+If you find these images useful and wish to support the creator(s), you can do
+so through GitHub Sponsors by clicking the "Sponsor" button.
+
+Donations help cover the cost of the server hosting the Plebian repository,
+and pay for new hardware such as additional boards or SD cards.
+
+Even without donations, this project will still continue, so do not feel
+pressured into parting with your hard-earned money. Also, consider making a
+donation to [Debian](https://www.debian.org/donations) instead, which makes up
+99.99% of what these images consist of.
