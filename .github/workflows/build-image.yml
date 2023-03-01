@@ -184,8 +184,12 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           path: artifacts/
+      - name: Generate checksums
+        run: |
+          ./generate-release-checksums.sh artifacts/
       - name: Make release
         uses: softprops/action-gh-release@v0.1.15
         with:
           files: |
             artifacts/**/plebian*.img.xz
+            artifacts/**/plebian*.img.xz.sha256
