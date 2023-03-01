@@ -40,12 +40,33 @@ For contribution guidelines and hints on how to achieve certain things in the
 preferred git workflow, please consult [CONTRIBUTING.md](CONTRIBUTING.md).
 
 
-## TODO:
+## TODO
+
+### Short-term Goals
 
 * package the wireless firmware
-* generate ubuntu based images
+* generate images for post-Bookworm Debian
+* upstream kernel work: mainline a PWM driver for the GP7101 on the Blade
+* upstream devicetree work: properly fix USB on CM4IO
+* upstream firmware work: submit the firmware files for SOQuartz and Model A
+  (if they can be found and their license can be determined)
+
+### Long-term Goals
+
+* set up a website with a guided first time setup UX that handholds users
+  through the process of selecting their board, selecting what OS they're using,
+  providing flashing instructions and telling them how to plug in their board
+  and access its login prompt
 * add more SOQuartz baseboards as I (or someone else) mainlines device trees for
-  them.
+  them (e.g. some Waveshare boards)
+
+### Uncertain Goals
+
+* generate Ubuntu based images
+* produce images for other PINE64 boards that have mainline kernel support
+  (No, I will not ship BSP kernels. You cannot convince me to do so. Go
+  mainline things.)
+* produce PineTab 2 images
 
 
 ## Donations
