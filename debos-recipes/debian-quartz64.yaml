@@ -59,6 +59,7 @@ actions:
       - dbus-broker
       - e2fsprogs
       - file
+      - firmware-brcm80211
       - gawk
       - initramfs-tools
       - liblockfile-bin
