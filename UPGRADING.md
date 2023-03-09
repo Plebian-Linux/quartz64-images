@@ -38,3 +38,10 @@ sudo curl -L https://github.com/Plebian-Linux/quartz64-images/raw/main/debos-rec
 sudo apt update
 sudo apt install devicetrees-plebian-quartz64
 ```
+
+
+## From 2023.02.28 to 2023.03.09
+
+1. Install the package `firmware-brcm80211`.
+2. Remove the file `/etc/apt/apt.conf.d/40default-release`
+3. Remove the file `/etc/apt/sources.list.d/sid.list`
