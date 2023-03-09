@@ -44,7 +44,6 @@ preferred git workflow, please consult [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ### Short-term Goals
 
-* package the wireless firmware
 * generate images for post-Bookworm Debian
 * upstream kernel work: mainline a PWM driver for the GP7101 on the Blade
 * upstream devicetree work: properly fix USB on CM4IO
