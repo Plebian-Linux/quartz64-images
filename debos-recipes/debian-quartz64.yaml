@@ -40,7 +40,7 @@ actions:
     destination: /usr/share/keyrings/
 
   - action: overlay
-    description: Copy apt config for Sid and Plebian
+    description: Copy apt config for Plebian
     source: overlays/apt/
     destination: /etc/apt/
 
@@ -65,6 +65,7 @@ actions:
       - liblockfile-bin
       - libnss-systemd
       - libpam-systemd
+      - linux-image-arm64
       - locales
       - lsof
       - man-db
@@ -125,12 +126,6 @@ actions:
     description: Copy initramfs from Plebian
     source: overlays/initramfs-tools-plebian/
     destination: /etc/initramfs-tools/
-
-  - action: run
-    description: Install kernel from Sid
-    chroot: true
-    command: |
-      apt-get install -y linux-image-arm64 -t sid
 
   - action: run
     description: Set up u-boot default file
