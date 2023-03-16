@@ -128,6 +128,11 @@ actions:
     destination: /etc/initramfs-tools/
 
   - action: run
+    description: Rebuild initramfs
+    chroot: true
+    command: update-initramfs -u -k all
+
+  - action: run
     description: Set up u-boot default file
     chroot: true
     script: scripts/set-u-boot-defaults.sh {{ $board }}
