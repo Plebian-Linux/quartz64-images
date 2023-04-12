@@ -83,8 +83,8 @@ as browsers do not yet support this API.
 ### Wi-Fi
 
 Plebian (or Debian, for that matter) does not yet properly package the wireless
-firmware needed for the Model B or SOQuartz's Wi-Fi chip. Therefore, Wi-Fi won't
-work out of the box.
+firmware needed for the SOQuartz's Wi-Fi chip. Therefore, Wi-Fi won't work out
+of the box on SOQuartz, but it will work on Model B.
 
 
 ## Further Reading
