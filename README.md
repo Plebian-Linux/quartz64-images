@@ -46,7 +46,6 @@ preferred git workflow, please consult [CONTRIBUTING.md](CONTRIBUTING.md).
 
 * generate images for post-Bookworm Debian
 * upstream kernel work: mainline a PWM driver for the GP7101 on the Blade
-* upstream devicetree work: properly fix USB on CM4IO
 * upstream firmware work: submit the firmware files for SOQuartz and Model A
   (if they can be found and their license can be determined)
 
