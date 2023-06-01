@@ -9,7 +9,7 @@ and hardware.
 
 First boot might take a little while (though not minutes), there's a rootfs
 growing initramfs hook running called `resizerootfs` that you can disable after
-first boot.
+first boot with `sudo chmod -x /etc/initramfs-tools/hooks/resizerootfs && sudo update-initramfs -u`.
 
 
 ## Default Login
