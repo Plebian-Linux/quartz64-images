@@ -187,9 +187,13 @@ jobs:
       - name: Generate checksums
         run: |
           ./generate-release-checksums.sh artifacts/
+      - name: Tar up u-boot binaries
+        run: |
+          tar -caf u-boot.tar.gz artifacts/u-boot*
       - name: Make release
         uses: softprops/action-gh-release@v0.1.15
         with:
           files: |
             artifacts/**/plebian*.img.xz
             artifacts/**/plebian*.img.xz.sha256
+            u-boot.tar.gz
