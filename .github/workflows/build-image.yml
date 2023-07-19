@@ -57,13 +57,13 @@ jobs:
           make mrproper
       - name: Fetch rkbins
         run: |
-          wget -q https://github.com/rockchip-linux/rkbin/blob/87885c48747a358dc8eb1808db99e313935e129e/bin/rk35/rk3568_bl31_v1.34.elf?raw=true -O u-boot-quartz64/rk3568_bl31_v1.34.elf
-          wget -q https://github.com/rockchip-linux/rkbin/blob/a4c6de9ea29f275bb1d08c94ccded51ff2ab5b92/bin/rk35/rk3566_ddr_1056MHz_v1.13.bin?raw=true -O u-boot-quartz64/rk3566_ddr_1056MHz_v1.13.bin
+          wget -q https://github.com/rockchip-linux/rkbin/raw/d6ccfe401ca84a98ca3b85c12b9554a1a43a166c/bin/rk35/rk3568_bl31_v1.42.elf -O u-boot-quartz64/rk3568_bl31_v1.42.elf
+          wget -q https://github.com/rockchip-linux/rkbin/raw/d6ccfe401ca84a98ca3b85c12b9554a1a43a166c/bin/rk35/rk3566_ddr_1056MHz_v1.16.bin -O u-boot-quartz64/rk3566_ddr_1056MHz_v1.16.bin
       - name: Build u-boot
         run: |
           cd u-boot-quartz64
-          export ROCKCHIP_TPL=rk3566_ddr_1056MHz_v1.13.bin
-          export BL31=rk3568_bl31_v1.34.elf
+          export ROCKCHIP_TPL=rk3566_ddr_1056MHz_v1.16.bin
+          export BL31=rk3568_bl31_v1.42.elf
           make ARCH=arm CROSS_COMPILE=aarch64-linux-gnu- ${{ matrix.boards.uboot-config }}
           make ARCH=arm CROSS_COMPILE=aarch64-linux-gnu- -j$(nproc)
       - name: Archive u-boot artifacts
