@@ -45,3 +45,20 @@ sudo apt install devicetrees-plebian-quartz64
 1. Install the package `firmware-brcm80211`.
 2. Remove the file `/etc/apt/apt.conf.d/40default-release`
 3. Remove the file `/etc/apt/sources.list.d/sid.list`
+
+## To 2023.07.19
+
+During this upgrade, u-boot will need to be updated.
+
+1. Download the u-boot build for your device from the release page.
+2. Find the device you have u-boot on with `lsblk`, it's probably the one your
+   `/` resides on as well, i.e. `/dev/mmcblk0` for SD and `/dev/mmcblk1` for
+   eMMC. We'll henceforth refer to this as `/dev/mmcblkX`.
+3. Install parted:
+   `sudo apt update && sudo apt install parted`
+4. Delete partition 2 of the device:
+   `sudo parted /dev/mmcblkX rm 2`
+5. Resize partition 1 of the device:
+   `sudo parted /dev/mmcblkX resizepart 1 32MiB`
+6. Flash u-boot to partition 1 of your device:
+   `sudo dd if=u-boot-rockchip.bin of=/dev/mmcblkXp1 oflag=dsync status=progress bs=1M`
