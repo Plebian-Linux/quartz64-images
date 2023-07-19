@@ -1,4 +1,4 @@
 [submodule "u-boot-quartz64"]
 	path = u-boot-quartz64
 	url = https://github.com/CounterPillow/u-boot-quartz64.git
-	branch = mainline-ish-2
+	branch = mainline-ish-3

@@ -22,7 +22,7 @@ jobs:
           },
           {
             name: "SOQuartz CM4IO",
-            uboot-config: "soquartz-cm4io-rk3566_defconfig",
+            uboot-config: "soquartz-cm4-rk3566_defconfig",
             uboot-name: "soquartz-cm4io"
           },
           {
@@ -71,8 +71,8 @@ jobs:
         with:
           name: u-boot-${{ matrix.boards.uboot-name }}
           path: |
-            u-boot-quartz64/u-boot.itb
-            u-boot-quartz64/idbloader.img
+            u-boot-quartz64/u-boot-rockchip.bin
+            u-boot-quartz64/u-boot-rockchip-spi.bin
   # build_kernel:
   #   runs-on: self-hosted
   #   steps:

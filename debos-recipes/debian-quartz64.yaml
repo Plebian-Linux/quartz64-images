@@ -170,13 +170,9 @@ actions:
         options:
           - 'x-systemd.growfs'
     partitions:
-      - name: idbloader
-        fs: none
-        start: 64s
-        end: 16383s
       - name: uboot
         fs: none
-        start: 16384s
+        start: 64s
         end: 65535s
       - name: root
         fs: ext4
@@ -189,15 +185,9 @@ actions:
     description: Deploy filesystem image
 
   - action: raw
-    description: Write U-Boot SPL image
+    description: Write U-Boot
     origin: recipe
-    source: '/u-boot/idbloader.img'
-    partition: idbloader
-
-  - action: raw
-    description: Write u-boot.itb
-    origin: recipe
-    source: '/u-boot/u-boot.itb'
+    source: '/u-boot/u-boot-rockchip.bin'
     partition: uboot
 
   - action: run
