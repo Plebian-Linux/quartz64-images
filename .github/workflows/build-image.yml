@@ -1,5 +1,5 @@
 name: Build Quartz64 Images
-on: workflow_dispatch
+on: [push, workflow_dispatch]
 
 jobs:
   build_uboot:
