@@ -169,7 +169,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y \
-            golang \
+            golang-1.19 \
             git \
             libglib2.0-dev \
             libostree-dev \
