@@ -40,52 +40,57 @@ jobs:
     steps:
       - name: Install toolchain
         run: |
-            sudo apt-get update
-            sudo apt-get install build-essential crossbuild-essential-arm64 device-tree-compiler python3-pyelftools
-      #- name: Clone rkbin repository
-      #  uses: actions/checkout@v3
-      #  with:
-      #    repository: 'rockchip-linux/rkbin'
-      #    path: 'rkbin'
+          sudo apt-get update
+          sudo apt-get install -y \
+            build-essential \
+            crossbuild-essential-arm64 \
+            device-tree-compiler \
+            python3-pyelftools
+      
       - name: Clone workflow repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
-            submodules: true
+          submodules: true
+
       - name: Clean u-boot
         run: |
           cd u-boot-quartz64
           make mrproper
+
       - name: Fetch rkbins
         run: |
           wget -q https://github.com/rockchip-linux/rkbin/raw/d6ccfe401ca84a98ca3b85c12b9554a1a43a166c/bin/rk35/rk3568_bl31_v1.42.elf -O u-boot-quartz64/rk3568_bl31_v1.42.elf
           wget -q https://github.com/rockchip-linux/rkbin/raw/d6ccfe401ca84a98ca3b85c12b9554a1a43a166c/bin/rk35/rk3566_ddr_1056MHz_v1.16.bin -O u-boot-quartz64/rk3566_ddr_1056MHz_v1.16.bin
+
       - name: Build u-boot
         run: |
           cd u-boot-quartz64
           export ROCKCHIP_TPL=rk3566_ddr_1056MHz_v1.16.bin
           export BL31=rk3568_bl31_v1.42.elf
           make ARCH=arm CROSS_COMPILE=aarch64-linux-gnu- ${{ matrix.boards.uboot-config }}
-          make ARCH=arm CROSS_COMPILE=aarch64-linux-gnu- -j$(nproc)
+          make ARCH=arm CROSS_COMPILE=aarch64-linux-gnu- -j"$(nproc)"
+
       - name: Archive u-boot artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: u-boot-${{ matrix.boards.uboot-name }}
           path: |
             u-boot-quartz64/u-boot-rockchip.bin
             u-boot-quartz64/u-boot-rockchip-spi.bin
+
   # build_kernel:
   #   runs-on: self-hosted
   #   steps:
   #     - name: Clone workflow repository
-  #       uses: actions/checkout@v3
+  #       uses: actions/checkout@v4
   #     - name: Install toolchain
   #       run: |
-  #           sudo apt-get -yq update && sudo apt-get -yq upgrade
-  #           sudo apt-get -yq install build-essential crossbuild-essential-arm64 device-tree-compiler \
+  #         sudo apt-get -yq update && sudo apt-get -yq upgrade
+  #         sudo apt-get -yq install build-essential crossbuild-essential-arm64 device-tree-compiler \
   #           autoconf bc bison flex ccache cpio dkms fakeroot kmod quilt rsync dh-exec \
   #           libssl-dev libncurses-dev libelf-dev libudev-dev libpci-dev libiberty-dev
   #     - name: Clone kernel repository
-  #       uses: actions/checkout@v3
+  #       uses: actions/checkout@v4
   #       with:
   #         repository: 'CounterPillow/linux'
   #         ref: 'quartz64-deploy'
@@ -98,15 +103,16 @@ jobs:
   #     - name: Build kernel
   #       run: |
   #         cd linux
-  #         make -j$(nproc) ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- deb-pkg
+  #         make -j"$(nproc)" ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- deb-pkg
   #     - name: Archive kernel artifacts
-  #       uses: actions/upload-artifact@v3
+  #       uses: actions/upload-artifact@v4
   #       with:
   #         name: linux-kernel
   #         path: |
   #           linux-image-*.deb
   #           linux-libc-dev*.deb
   #           !linux-image-*dbg*.deb
+
   build_image:
     strategy:
       matrix:
@@ -145,33 +151,46 @@ jobs:
       GOPATH: /opt/src/gocode
     steps:
       - name: Clone workflow repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+
       - name: Download u-boot artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
-          name: u-boot-${{ matrix.boards.uboot-name}}
+          name: u-boot-${{ matrix.boards.uboot-name }}
           path: debos-recipes/u-boot/
+
       # - name: Download kernel artifacts
-      #   uses: actions/download-artifact@v3
+      #   uses: actions/download-artifact@v4
       #   with:
       #     name: linux-kernel
       #     path: debos-recipes/overlays/linux-kernel/
+
       - name: Install debos dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install golang git libglib2.0-dev libostree-dev \
-                               qemu-system-x86 qemu-user-static debootstrap \
-                               systemd-container
+          sudo apt-get install -y \
+            golang \
+            git \
+            libglib2.0-dev \
+            libostree-dev \
+            qemu-system-x86 \
+            qemu-user-static \
+            debootstrap \
+            systemd-container
+
       - name: Install debos
         run: go install -v github.com/go-debos/debos/cmd/debos@latest
+
       - name: Build ${{ matrix.boards.name }} Image
         run: sudo /opt/src/gocode/bin/debos --disable-fakemachine debos-recipes/${{ matrix.boards.debos-yaml }}
+
       - name: Archive image artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.boards.name }} Image
           path: |
             *.img.xz
+
   do_release:
     if: startsWith(github.ref, 'refs/tags/')
     runs-on: ubuntu-latest
@@ -179,17 +198,21 @@ jobs:
       - build_image
     steps:
       - name: Clone workflow repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+
       - name: Download image artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           path: artifacts/
+
       - name: Generate checksums
         run: |
           ./generate-release-checksums.sh artifacts/
+
       - name: Tar up u-boot binaries
         run: |
           tar -caf u-boot.tar.gz artifacts/u-boot*
+
       - name: Make release
         uses: softprops/action-gh-release@v0.1.15
         with:
