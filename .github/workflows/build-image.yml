@@ -1,5 +1,5 @@
 name: Build Quartz64 Images
-on: push
+on: workflow_dispatch
 jobs:
   build_uboot:
     strategy:
