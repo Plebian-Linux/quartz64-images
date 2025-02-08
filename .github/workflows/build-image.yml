@@ -77,7 +77,7 @@ jobs:
   #   runs-on: self-hosted
   #   steps:
   #     - name: Clone workflow repository
-  #       uses: actions/checkout@v3
+  #       uses: actions/checkout@v4
   #     - name: Install toolchain
   #       run: |
   #           sudo apt-get -yq update && sudo apt-get -yq upgrade
@@ -85,7 +85,7 @@ jobs:
   #           autoconf bc bison flex ccache cpio dkms fakeroot kmod quilt rsync dh-exec \
   #           libssl-dev libncurses-dev libelf-dev libudev-dev libpci-dev libiberty-dev
   #     - name: Clone kernel repository
-  #       uses: actions/checkout@v3
+  #       uses: actions/checkout@v4
   #       with:
   #         repository: 'CounterPillow/linux'
   #         ref: 'quartz64-deploy'
@@ -100,7 +100,7 @@ jobs:
   #         cd linux
   #         make -j$(nproc) ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- deb-pkg
   #     - name: Archive kernel artifacts
-  #       uses: actions/upload-artifact@v3
+  #       uses: actions/upload-artifact@v4
   #       with:
   #         name: linux-kernel
   #         path: |
@@ -152,7 +152,7 @@ jobs:
           name: u-boot-${{ matrix.boards.uboot-name}}
           path: debos-recipes/u-boot/
       # - name: Download kernel artifacts
-      #   uses: actions/download-artifact@v3
+      #   uses: actions/download-artifact@v4
       #   with:
       #     name: linux-kernel
       #     path: debos-recipes/overlays/linux-kernel/
@@ -195,7 +195,7 @@ jobs:
         run: |
           tar -caf u-boot.tar.gz artifacts/u-boot*
       - name: Make release
-        uses: softprops/action-gh-release@v0.1.15
+        uses: softprops/action-gh-release@v2
         with:
           files: |
             artifacts/**/plebian*.img.xz
