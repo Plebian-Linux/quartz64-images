@@ -22,7 +22,7 @@ jobs:
           cd deb-pkg
           ./build-devicetree-deb.sh
       - name: Archive Device Tree Debs
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: devicetrees-plebian-quartz64
           path: |
